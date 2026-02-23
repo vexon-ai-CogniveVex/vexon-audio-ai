@@ -1,86 +1,126 @@
 import { motion } from "framer-motion";
-import { Mic, Headphones, BarChart3, ArrowRight } from "lucide-react";
+import { FiCpu, FiMusic, FiActivity, FiArrowRight } from "react-icons/fi";
+import featuresImage from "@/assets/images/features_neural_soundscape_1771846610136.png";
 
 const features = [
   {
-    icon: Mic,
-    title: "Generate",
-    description: "Synthetic voices, multilingual dubbing, emotion-aware audio production at scale.",
-    accent: "from-primary to-purple-400",
-    iconBg: "bg-primary/10 text-primary",
+    icon: FiMusic,
+    title: "Neural Generation",
+    description: "Compose entire soundscapes or individual instruments from skeletal prompts. True creative synthesis.",
+    color: "primary",
   },
   {
-    icon: Headphones,
-    title: "Enhance",
-    description: "Noise reduction, mastering, filler word removal — studio quality in seconds.",
-    accent: "from-secondary to-orange-400",
-    iconBg: "bg-secondary/10 text-secondary",
+    icon: FiCpu,
+    title: "Quantum Enhancement",
+    description: "Reconstruct degraded audio using temporal alignment and spectral deep-cleaning.",
+    color: "purple-400",
   },
   {
-    icon: BarChart3,
-    title: "Understand",
-    description: "Transcription, emotion detection, compliance insights powered by AI.",
-    accent: "from-accent to-yellow-300",
-    iconBg: "bg-accent/10 text-accent",
+    icon: FiActivity,
+    title: "Semantic Analysis",
+    description: "Extract emotional intent, subtext, and rhythmic structures from any audio stream instantly.",
+    color: "blue-400",
   },
 ];
 
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: (i: number) => ({
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  }),
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  },
 };
 
 const FeaturesSection = () => (
-  <section className="relative py-32 bg-noise">
-    <div className="absolute inset-0 bg-glow opacity-50" />
-    <div className="container relative z-10 mx-auto px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-20"
-      >
-        <p className="text-sm font-semibold tracking-widest text-primary mb-4">CAPABILITIES</p>
-        <h2 className="font-display text-4xl font-bold text-foreground md:text-6xl max-w-2xl">
-          What <span className="font-serif-accent text-gradient-primary">Vexon</span> can do
-        </h2>
-      </motion.div>
+  <section className="relative py-40 overflow-hidden bg-[#0a0a0a]">
+    {/* Decorative background image */}
+    <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 blur-3xl pointer-events-none">
+      <img src={featuresImage} alt="" className="object-cover h-full w-full" />
+    </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
+    <div className="container relative z-10 mx-auto px-6">
+      <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-2xl"
+        >
+          <span className="text-[10px] tracking-[0.4em] uppercase text-primary font-bold mb-6 block">Capabilities</span>
+          <h2 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
+            Transcending the <br />
+            <span className="text-white/30 italic">Auditory Horizon.</span>
+          </h2>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="max-w-md text-white/40 text-lg font-light leading-relaxed"
+        >
+          Our platform leverages next-generation neural architectures to redefine what's possible in the audio landscape.
+        </motion.p>
+      </div>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid gap-8 md:grid-cols-3"
+      >
         {features.map((f, i) => (
           <motion.div
             key={f.title}
-            custom={i}
-            variants={item}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="group relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-card p-10 transition-all duration-500 hover:border-primary/40 hover:shadow-glow-primary"
+            variants={itemVariants}
+            whileHover={{ y: -10 }}
+            className="group relative h-full overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-12 backdrop-blur-3xl transition-colors hover:bg-white/[0.04]"
           >
-            {/* Gradient line at top */}
-            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${f.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+            {/* Hover glow */}
+            <div className="absolute -inset-px rounded-[2.5rem] bg-gradient-to-b from-primary/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-            <div className={`mb-8 inline-flex rounded-xl p-4 ${f.iconBg}`}>
-              <f.icon size={28} strokeWidth={1.5} />
+            <div className={`mb-10 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-${f.color}/10 text-${f.color} transition-transform group-hover:scale-110 group-hover:rotate-3`}>
+              <f.icon className="text-3xl" />
             </div>
-            <h3 className="mb-4 font-display text-2xl font-bold text-foreground">
+
+            <h3 className="mb-6 font-display text-2xl font-bold text-white">
               {f.title}
             </h3>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+
+            <p className="text-white/40 leading-relaxed mb-8 font-light text-lg">
               {f.description}
             </p>
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-              Learn more <ArrowRight size={14} />
-            </span>
+
+            <motion.div
+              className="flex items-center gap-2 text-white font-medium cursor-pointer"
+              whileHover={{ x: 5 }}
+            >
+              <span className="text-sm tracking-widest uppercase">Deep Dive</span>
+              <FiArrowRight className="text-primary" />
+            </motion.div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 );
 
 export default FeaturesSection;
+

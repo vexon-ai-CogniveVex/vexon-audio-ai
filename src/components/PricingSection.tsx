@@ -1,73 +1,119 @@
 import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
+import { FiCheck, FiZap, FiStar } from "react-icons/fi";
 
 const plans = [
-  { name: "Starter", price: "Free", period: "", features: ["Limited minutes", "Watermarked output", "Basic support"], highlight: false },
-  { name: "Creator", price: "$19", period: "/mo", features: ["Unlimited enhancement", "Voice generation", "Priority support"], highlight: true },
-  { name: "Business", price: "$49", period: "/mo", features: ["Analytics dashboard", "Multilingual dubbing", "Team access"], highlight: false },
-  { name: "Enterprise", price: "Custom", period: "", features: ["Compliance-ready", "API integrations", "Dedicated support"], highlight: false },
+  {
+    name: "Acoustic",
+    price: "0",
+    description: "Perfect for exploring the basics of neural audio.",
+    features: ["5 Enhancement Credits", "Standard Quality (44.1kHz)", "Community Access"],
+    popular: false,
+    cta: "Start Free"
+  },
+  {
+    name: "Studio",
+    price: "29",
+    description: "The choice for professional creators and musicians.",
+    features: ["Unlimited Enhancements", "Studio Quality (96kHz)", "Voice Synthesis Engine", "Priority Support"],
+    popular: true,
+    cta: "Launch Studio"
+  },
+  {
+    name: "Orchestral",
+    price: "89",
+    description: "Unprecedented power for teams and agencies.",
+    features: ["Everything in Studio", "Technical API Access", "Custom Model Training", "Dedicated Architect"],
+    popular: false,
+    cta: "Scale Now"
+  }
 ];
 
 const PricingSection = () => (
-  <section className="relative py-32 bg-noise">
-    <div className="absolute inset-0 bg-glow-accent opacity-40" />
-    <div className="container relative z-10 mx-auto px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-20"
-      >
-        <p className="text-sm font-semibold tracking-widest text-accent mb-4">PRICING</p>
-        <h2 className="font-display text-4xl font-bold text-foreground md:text-6xl">
-          Early Access <span className="font-serif-accent text-gradient-accent">Special</span>
-        </h2>
-      </motion.div>
+  <section className="relative py-40 bg-[#0a0a0a] overflow-hidden">
+    {/* Decorative Gradients */}
+    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]" />
+    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px]" />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+    <div className="container relative z-10 mx-auto px-6">
+      <div className="text-center mb-24">
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-4 block"
+        >
+          Investment
+        </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="font-display text-5xl md:text-6xl font-bold text-white mb-6"
+        >
+          Choose your <span className="text-white/30 italic">Frequency.</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-white/40 max-w-xl mx-auto font-light text-lg"
+        >
+          Simple, transparent commitments for every stage of your creative journey.
+        </motion.p>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto items-center">
         {plans.map((plan, i) => (
           <motion.div
             key={plan.name}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className={`relative overflow-hidden rounded-2xl p-8 transition-all duration-500 ${
-              plan.highlight
-                ? "border-2 border-primary/60 bg-primary/5 shadow-glow-primary scale-[1.02]"
-                : "border border-border/50 bg-gradient-card hover:border-primary/30"
-            }`}
+            transition={{ delay: i * 0.1, duration: 0.8 }}
+            whileHover={{ y: -15 }}
+            className={`relative flex flex-col h-full rounded-[2.5rem] p-10 backdrop-blur-3xl transition-all duration-500 ${plan.popular
+                ? "bg-white/[0.05] border border-primary/30 py-16"
+                : "bg-white/[0.02] border border-white/5 py-12"
+              }`}
           >
-            {plan.highlight && (
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-purple-400 to-primary" />
+            {plan.popular && (
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 rounded-full bg-primary px-6 py-2 flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] text-black">
+                <FiStar className="text-xs" />
+                RECOMMENDED
+              </div>
             )}
-            {plan.highlight && (
-              <span className="mb-6 inline-flex items-center gap-1 rounded-full bg-primary/15 px-3 py-1 text-xs font-bold text-primary">
-                <Sparkles size={12} /> MOST POPULAR
-              </span>
-            )}
-            <h3 className="font-display text-lg font-semibold text-foreground">{plan.name}</h3>
-            <div className="mt-4 flex items-baseline gap-1">
-              <span className="font-display text-4xl font-bold text-foreground">{plan.price}</span>
-              {plan.period && <span className="text-sm text-muted-foreground">{plan.period}</span>}
+
+            <div className="mb-10">
+              <h3 className="font-display text-2xl font-bold text-white mb-2">{plan.name}</h3>
+              <p className="text-white/30 text-sm font-light leading-relaxed">{plan.description}</p>
             </div>
-            <div className="divider-gradient my-6" />
-            <ul className="space-y-3 mb-8">
-              {plan.features.map((f) => (
-                <li key={f} className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <Check size={14} className="text-primary shrink-0" />
-                  {f}
+
+            <div className="mb-10 flex items-baseline gap-2">
+              <span className="font-display text-6xl font-bold text-white">${plan.price}</span>
+              <span className="text-white/30 font-light lowercase">/period</span>
+            </div>
+
+            <div className="w-full h-px bg-white/5 mb-10" />
+
+            <ul className="space-y-5 mb-12 flex-grow">
+              {plan.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-4 text-white/50 text-sm font-light">
+                  <FiCheck className="text-primary mt-1 shrink-0" />
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
+
             <button
-              className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
-                plan.highlight
-                  ? "bg-primary text-primary-foreground hover:shadow-glow-primary hover:scale-[1.02] active:scale-[0.98]"
-                  : "border border-border bg-muted/50 text-foreground hover:border-primary/40 hover:bg-muted"
-              }`}
+              className={`w-full rounded-2xl py-5 text-sm font-bold tracking-[0.1em] uppercase transition-all flex items-center justify-center gap-2 ${plan.popular
+                  ? "bg-white text-black hover:bg-primary transition-colors"
+                  : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                }`}
             >
-              Get Started
+              {plan.cta}
+              {plan.popular && <FiZap className="text-lg" />}
             </button>
           </motion.div>
         ))}
@@ -77,3 +123,4 @@ const PricingSection = () => (
 );
 
 export default PricingSection;
+

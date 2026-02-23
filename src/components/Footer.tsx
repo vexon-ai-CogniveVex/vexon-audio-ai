@@ -1,31 +1,37 @@
 import { Link } from "react-router-dom";
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { FiTwitter, FiGithub, FiLinkedin, FiActivity } from "react-icons/fi";
 
 const Footer = () => (
-  <footer className="border-t border-border/50 bg-background py-20">
-    <div className="container mx-auto px-6">
-      <div className="grid gap-12 md:grid-cols-5">
-        <div className="md:col-span-2">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="relative flex items-center justify-center w-7 h-7">
-              <div className="absolute inset-0 rounded-md bg-primary/20" />
-              <div className="flex items-center gap-[2px]">
-                {[8, 12, 16, 12, 8].map((h, i) => (
-                  <span key={i} className="waveform-line" style={{ height: h, width: 2 }} />
-                ))}
-              </div>
+  <footer className="relative bg-[#050505] pt-32 pb-16 overflow-hidden">
+    {/* Subtle glow */}
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+    <div className="container relative z-10 mx-auto px-6">
+      <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-5 mb-24">
+        <div className="lg:col-span-2">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
+              <FiActivity className="text-black text-lg" />
             </div>
-            <span className="font-display text-base font-bold text-foreground">
-              Cognive<span className="text-gradient-primary">Vex</span>
+            <span className="font-display text-xl font-bold tracking-tighter text-white">
+              VEXON<span className="text-white/30 italic">AI</span>
             </span>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-6">
-            From Sound to Sense — AI Audio Reinvented. Building the future of intelligent audio processing.
+          <p className="text-white/40 font-light leading-relaxed max-w-sm mb-10 text-lg">
+            Architecting the future of intelligent audio synthesis. From neural generation to quantum enhancement.
           </p>
-          <div className="flex items-center gap-3">
-            {[Twitter, Github, Linkedin].map((Icon, i) => (
-              <a key={i} href="#" className="rounded-lg border border-border/50 p-2.5 text-muted-foreground transition-all hover:text-foreground hover:border-primary/40 hover:bg-muted">
-                <Icon size={16} />
+          <div className="flex items-center gap-4">
+            {[
+              { icon: FiTwitter, href: "#" },
+              { icon: FiGithub, href: "#" },
+              { icon: FiLinkedin, href: "#" }
+            ].map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                className="w-12 h-12 rounded-2xl border border-white/5 bg-white/[0.02] flex items-center justify-center text-white/40 transition-all hover:text-white hover:bg-white/5 hover:border-white/10"
+              >
+                <social.icon size={20} />
               </a>
             ))}
           </div>
@@ -33,25 +39,25 @@ const Footer = () => (
 
         {[
           {
-            title: "Product",
+            title: "Foundation",
             links: [
-              { label: "Features", to: "/features" },
-              { label: "Use Cases", to: "/product" },
-              { label: "Pricing", to: "/" },
-              { label: "API Docs", to: "#" },
+              { label: "Neural Engine", to: "/product" },
+              { label: "Synthesis", to: "/features" },
+              { label: "Enhancement", to: "/features" },
+              { label: "API", to: "#" },
             ],
           },
           {
-            title: "Company",
+            title: "Network",
             links: [
-              { label: "About", to: "/about" },
-              { label: "Blog", to: "#" },
-              { label: "Contact", to: "/contact" },
-              { label: "Careers", to: "#" },
+              { label: "Origins", to: "/about" },
+              { label: "Vanguard", to: "#" },
+              { label: "Protocols", to: "/contact" },
+              { label: "Archives", to: "#" },
             ],
           },
           {
-            title: "Legal",
+            title: "Protocols",
             links: [
               { label: "Privacy", to: "#" },
               { label: "Terms", to: "#" },
@@ -60,15 +66,15 @@ const Footer = () => (
           },
         ].map((section) => (
           <div key={section.title}>
-            <h4 className="mb-5 font-display text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+            <h4 className="mb-8 font-display text-[10px] font-bold tracking-[0.4em] text-white uppercase">
               {section.title}
             </h4>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {section.links.map((link) => (
                 <Link
                   key={link.label}
                   to={link.to}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-white/30 text-sm font-light transition-colors hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -78,12 +84,18 @@ const Footer = () => (
         ))}
       </div>
 
-      <div className="divider-gradient mt-16 mb-8" />
-      <p className="text-center text-xs text-muted-foreground">
-        © 2026 CogniveVex. All rights reserved.
-      </p>
+      <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/5">
+        <p className="text-white/20 text-xs tracking-widest uppercase mb-4 md:mb-0">
+          © 2026 VEXON AUDIO AI · Neural Processing Unit
+        </p>
+        <div className="flex items-center gap-8">
+          <span className="text-white/20 text-[10px] tracking-[0.2em] uppercase">Status: Optimal</span>
+          <span className="text-white/20 text-[10px] tracking-[0.2em] uppercase">Latency: 2ms</span>
+        </div>
+      </div>
     </div>
   </footer>
 );
 
 export default Footer;
+

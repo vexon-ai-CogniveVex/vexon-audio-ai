@@ -1,105 +1,123 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Eye, Heart, Sparkles } from "lucide-react";
+import { FiEye, FiShield, FiHeart, FiZap, FiActivity } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import aboutImage from "@/assets/images/about_company_mission_abstract_1771846645347.png";
 
 const values = [
-  { icon: Eye, title: "Transparency", desc: "Every AI decision is explainable. No black boxes." },
-  { icon: ShieldCheck, title: "Security", desc: "End-to-end encryption. SOC 2 compliant infrastructure." },
-  { icon: Heart, title: "Consent", desc: "Voice cloning requires explicit consent. Always." },
-  { icon: Sparkles, title: "Innovation", desc: "Pushing the boundaries of what audio AI can achieve." },
+  { icon: FiEye, title: "Total Transparency", desc: "Our neural logic isn't a black box. We prioritize explainability in every generated waveform.", color: "primary" },
+  { icon: FiShield, title: "Hardened Security", desc: "End-to-end encryption for every byte of audio, hosted on SOC 2 Type II infrastructure.", color: "purple-400" },
+  { icon: FiHeart, title: "Ethical Consent", desc: "Voice synthesis requires cryptographic proof of consent. We build with respect for identity.", color: "blue-400" },
+  { icon: FiZap, title: "Relentless R&D", desc: "Staying at the bleeding edge of spectral reconstruction and neural synthesis research.", color: "primary" },
 ];
 
 const About = () => (
-  <div className="min-h-screen bg-background">
+  <div className="min-h-screen bg-[#050505] text-white">
     <Navbar />
 
-    {/* Editorial hero */}
-    <section className="relative pt-32 pb-24 bg-noise overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero" />
+    {/* Cinematic Editorial Hero */}
+    <section className="relative pt-48 pb-32 overflow-hidden border-b border-white/5">
       <div className="container relative z-10 mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-end">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <p className="text-sm font-semibold tracking-widest text-primary mb-4">ABOUT US</p>
-            <h1 className="font-display text-5xl font-bold text-foreground md:text-7xl leading-[1.1]">
-              Our <span className="font-serif-accent text-gradient-primary">Vision</span>
+        <div className="flex flex-col lg:flex-row items-end gap-20">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-1"
+          >
+            <span className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-8 block">The Vexon Manifesto</span>
+            <h1 className="font-display text-6xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-9xl mb-10">
+              Sound is <br />
+              <span className="text-white/30 italic font-light">Intelligence.</span>
             </h1>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}>
-            <p className="text-xl text-muted-foreground leading-relaxed font-light">
-              Turning complex audio challenges into clear, actionable intelligence. We believe audio is the most underutilized data source — and Vexon is here to change that.
+            <p className="max-w-xl text-white/40 text-xl font-light leading-relaxed">
+              We started with a simple belief: that the world's most critical data is audio. We are dedicated to building the infrastructure that lets humanity hear what it's been missing.
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-1 h-[600px] relative overflow-hidden rounded-[4rem] border border-white/10"
+          >
+            <img src={aboutImage} alt="Mission Abstract" className="absolute inset-0 w-full h-full object-cover scale-110" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            <div className="absolute bottom-12 left-12 right-12">
+              <div className="flex items-center gap-4 text-white/60">
+                <FiActivity className="text-primary animate-pulse" />
+                <span className="text-[10px] tracking-[0.2em] font-bold uppercase">System Status: Active</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
 
-    {/* Pull quote */}
-    <section className="py-24">
-      <div className="container mx-auto px-6">
-        <motion.blockquote
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <div className="divider-gradient mb-10" />
-          <p className="font-serif text-3xl italic text-foreground leading-relaxed md:text-4xl">
-            "We don't just process audio — we <span className="text-gradient-primary">understand</span> it."
-          </p>
-          <div className="divider-gradient mt-10" />
-        </motion.blockquote>
-      </div>
-    </section>
+    {/* Values Matrix */}
+    <section className="py-40 relative">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
-    {/* Values grid */}
-    <section className="py-24 bg-noise">
       <div className="container mx-auto px-6">
-        <div className="mb-16">
-          <p className="text-sm font-semibold tracking-widest text-accent mb-4">OUR VALUES</p>
-          <h2 className="font-display text-4xl font-bold text-foreground md:text-5xl">
-            Ethical <span className="font-serif-accent text-gradient-accent">AI</span> at our core
+        <div className="mb-24">
+          <span className="text-[10px] tracking-[0.4em] uppercase text-primary font-bold mb-6 block">Our Foundation</span>
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-white leading-tight max-w-2xl">
+            Ethical <span className="text-white/30 italic">Precedents.</span>
           </h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {values.map((v, i) => (
             <motion.div
               key={v.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass rounded-2xl p-8 transition-all duration-500 hover:shadow-glow-primary"
+              transition={{ delay: i * 0.1, duration: 0.8 }}
+              className="group relative flex flex-col h-full rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-10 transition-all hover:bg-white/[0.04] hover:border-white/10"
             >
-              <div className="mb-6 inline-flex rounded-xl bg-accent/10 p-3 text-accent">
-                <v.icon size={24} strokeWidth={1.5} />
+              <div className={`mb-10 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-${v.color}/10 text-${v.color}`}>
+                <v.icon size={26} />
               </div>
-              <h3 className="font-display text-lg font-semibold text-foreground mb-2">{v.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+              <h3 className="font-display text-xl font-bold text-white mb-4">{v.title}</h3>
+              <p className="text-white/30 font-light leading-relaxed text-sm flex-grow">{v.desc}</p>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Watermark & ethics note */}
-    <section className="py-24">
+    {/* High-End Trust Section */}
+    <section className="py-40 bg-[#0a0a0a]">
       <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="mx-auto max-w-2xl rounded-2xl border border-border/50 bg-gradient-card p-12 text-center"
+          className="relative overflow-hidden rounded-[4rem] border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-16 md:p-32 text-center backdrop-blur-3xl"
         >
-          <ShieldCheck size={40} className="mx-auto mb-6 text-primary" />
-          <h3 className="font-display text-2xl font-bold text-foreground mb-4">
-            Every synthetic voice is watermarked
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+          <FiShield size={60} className="mx-auto mb-10 text-primary opacity-50" />
+          <h3 className="font-display text-4xl md:text-6xl font-bold text-white mb-8 max-w-4xl mx-auto leading-tight">
+            Every synthetic voice is <span className="text-white/30 italic">Permanently Indexed.</span>
           </h3>
-          <p className="text-muted-foreground leading-relaxed">
-            We embed imperceptible watermarks in all AI-generated audio to ensure traceability, 
-            prevent misuse, and maintain trust in the audio ecosystem.
+          <p className="text-white/40 text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            We embed imperceptible neural watermarks in every millisecond of generated audio. Integrity is built into the bitstream, ensuring total traceability and ecosystem trust.
           </p>
+
+          <div className="mt-16 flex items-center justify-center gap-12">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white mb-1">SOC 2</div>
+              <div className="text-[10px] tracking-[0.2em] text-white/20 uppercase font-bold">Compliant</div>
+            </div>
+            <div className="w-px h-10 bg-white/10" />
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white mb-1">AES-256</div>
+              <div className="text-[10px] tracking-[0.2em] text-white/20 uppercase font-bold">Encrypted</div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -109,3 +127,4 @@ const About = () => (
 );
 
 export default About;
+
