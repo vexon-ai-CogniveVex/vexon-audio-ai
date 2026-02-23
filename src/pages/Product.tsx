@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiLayers, FiZap, FiGlobe, FiArrowRight, FiUsers, FiBriefcase, FiCast, FiCpu } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -60,7 +61,7 @@ const Product = () => (
               <button className="rounded-full bg-white px-10 py-5 font-bold text-black hover:bg-primary transition-colors tracking-widest uppercase text-xs">
                 Initialize System
               </button>
-              <span className="text-[10px] tracking-[0.3em] uppercase text-white/20 font-bold underline underline-offset-8 cursor-pointer hover:text-white transition-colors">Technical Briefing</span>
+              <Link to="/technology" className="text-[10px] tracking-[0.3em] uppercase text-white/20 font-bold underline underline-offset-8 cursor-pointer hover:text-white transition-colors">Technical Briefing</Link>
             </div>
           </motion.div>
 

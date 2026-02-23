@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiArrowRight, FiActivity } from "react-icons/fi";
 
 const CTASection = () => (
@@ -54,17 +55,16 @@ const CTASection = () => (
             transition={{ delay: 0.3 }}
             className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <Link
+              to="/signup"
               className="group relative inline-flex items-center gap-4 rounded-full bg-white px-12 py-6 font-display text-lg font-bold text-black transition-all hover:shadow-[0_0_60px_rgba(255,255,255,0.3)]"
             >
               Secure Encryption Node
               <FiArrowRight size={24} className="transition-transform group-hover:translate-x-1" />
-            </motion.button>
-            <button className="text-white/40 font-display font-medium tracking-widest uppercase text-sm hover:text-white transition-colors">
+            </Link>
+            <Link to="/contact" className="text-white/40 font-display font-medium tracking-widest uppercase text-sm hover:text-white transition-colors">
               Access Protocols →
-            </button>
+            </Link>
           </motion.div>
         </div>
       </motion.div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiCheck, FiZap, FiStar } from "react-icons/fi";
 
 const plans = [
@@ -74,8 +75,8 @@ const PricingSection = () => (
             transition={{ delay: i * 0.1, duration: 0.8 }}
             whileHover={{ y: -15 }}
             className={`relative flex flex-col h-full rounded-[2.5rem] p-10 backdrop-blur-3xl transition-all duration-500 ${plan.popular
-                ? "bg-white/[0.05] border border-primary/30 py-16"
-                : "bg-white/[0.02] border border-white/5 py-12"
+              ? "bg-white/[0.05] border border-primary/30 py-16"
+              : "bg-white/[0.02] border border-white/5 py-12"
               }`}
           >
             {plan.popular && (
@@ -106,15 +107,16 @@ const PricingSection = () => (
               ))}
             </ul>
 
-            <button
+            <Link
+              to="/signup"
               className={`w-full rounded-2xl py-5 text-sm font-bold tracking-[0.1em] uppercase transition-all flex items-center justify-center gap-2 ${plan.popular
-                  ? "bg-white text-black hover:bg-primary transition-colors"
-                  : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                ? "bg-white text-black hover:bg-primary transition-colors"
+                : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
                 }`}
             >
               {plan.cta}
               {plan.popular && <FiZap className="text-lg" />}
-            </button>
+            </Link>
           </motion.div>
         ))}
       </div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiCpu, FiMusic, FiActivity, FiArrowRight } from "react-icons/fi";
 import featuresImage from "@/assets/images/features_neural_soundscape_1771846610136.png";
 
@@ -108,13 +109,13 @@ const FeaturesSection = () => (
               {f.description}
             </p>
 
-            <motion.div
+            <Link
+              to="/technology"
               className="flex items-center gap-2 text-white font-medium cursor-pointer"
-              whileHover={{ x: 5 }}
             >
               <span className="text-sm tracking-widest uppercase">Deep Dive</span>
               <FiArrowRight className="text-primary" />
-            </motion.div>
+            </Link>
           </motion.div>
         ))}
       </motion.div>

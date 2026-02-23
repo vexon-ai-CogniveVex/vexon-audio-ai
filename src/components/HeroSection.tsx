@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroImage from "@/assets/images/hero_abstract_audio_ai_1771846585741.png";
+import { Link } from "react-router-dom";
 import { FiArrowRight, FiPlayCircle } from "react-icons/fi";
 
 const HeroSection = () => {
@@ -19,12 +20,12 @@ const HeroSection = () => {
       {/* Background with parallax effect */}
       <motion.div style={{ opacity, scale }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/50 to-[#050505] z-10" />
-        <img 
-          src={heroImage} 
-          alt="Abstract Audio AI" 
+        <img
+          src={heroImage}
+          alt="Abstract Audio AI"
           className="h-full w-full object-cover opacity-60"
         />
-        
+
         {/* Animated Orbs */}
         <motion.div
           animate={{
@@ -69,7 +70,7 @@ const HeroSection = () => {
             </span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -80,7 +81,7 @@ const HeroSection = () => {
             into Soul.
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
@@ -95,15 +96,11 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="mt-14 flex flex-col items-center gap-6 sm:flex-row sm:justify-center"
           >
-            <button className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-10 py-5 font-display text-sm font-bold text-black transition-all hover:pr-12 active:scale-95">
+            <Link to="/signup" className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-10 py-5 font-display text-sm font-bold text-black transition-all hover:pr-12 active:scale-95">
               <span>Initialize Vexon</span>
               <FiArrowRight className="text-lg transition-transform group-hover:translate-x-1" />
               <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary to-purple-500 scale-x-0 transition-transform group-hover:scale-x-100" />
-            </button>
-            <button className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-10 py-5 font-display text-sm font-bold text-white backdrop-blur-xl transition-all hover:bg-white/10 active:scale-95">
-              <FiPlayCircle className="text-xl text-primary" />
-              View Architecture
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

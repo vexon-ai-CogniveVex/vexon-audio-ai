@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiUpload, FiPlay, FiPause, FiDisc } from "react-icons/fi";
 import { useState } from "react";
 
@@ -96,10 +97,10 @@ const DemoSection = () => {
 
               {/* Controls Layout */}
               <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12 border-t border-white/5 pt-12">
-                <div className="text-left">
-                  <h3 className="text-white font-display text-xl font-bold mb-2">Neural Master Engine</h3>
-                  <p className="text-white/40 font-light">48kHz / 32-bit Float Processing</p>
-                </div>
+                <Link to="/technology" className="text-left group/text">
+                  <h3 className="text-white font-display text-xl font-bold mb-2 group-hover/text:text-primary transition-colors">Neural Master Engine</h3>
+                  <p className="text-white/40 font-light underline underline-offset-4 decoration-white/10 group-hover/text:decoration-primary/30">48kHz / 32-bit Float Processing</p>
+                </Link>
 
                 <motion.button
                   whileHover={{ scale: 1.1 }}

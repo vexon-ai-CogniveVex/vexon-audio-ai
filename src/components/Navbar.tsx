@@ -44,8 +44,8 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   className={`relative px-5 py-2 text-sm font-medium tracking-widest uppercase transition-all duration-300 ${location.pathname === link.path
-                      ? "text-primary"
-                      : "text-white/50 hover:text-white"
+                    ? "text-primary"
+                    : "text-white/50 hover:text-white"
                     }`}
                 >
                   {location.pathname === link.path && (
@@ -57,12 +57,18 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                to="/login"
+                className="relative px-5 py-2 text-sm font-medium tracking-widest uppercase text-white/50 hover:text-white transition-all duration-300"
+              >
+                Login
+              </Link>
             </div>
 
             <div className="ml-4 w-px h-6 bg-white/10" />
 
             <Link
-              to="/"
+              to="/signup"
               className="ml-4 relative group overflow-hidden rounded-full bg-white px-8 py-3 text-xs font-bold tracking-[0.2em] uppercase text-black transition-all hover:pr-10"
             >
               <span className="relative z-10 transition-transform group-hover:-translate-x-1 inline-block">Initialize</span>
@@ -102,11 +108,18 @@ const Navbar = () => {
               ))}
               <div className="h-px bg-white/10 my-4" />
               <Link
-                to="/"
+                to="/signup"
                 onClick={() => setOpen(false)}
                 className="rounded-full bg-white px-8 py-5 text-center text-sm font-bold tracking-[0.2em] uppercase text-black"
               >
                 Get Started
+              </Link>
+              <Link
+                to="/login"
+                onClick={() => setOpen(false)}
+                className="text-center text-sm font-bold tracking-[0.2em] uppercase text-white/50 hover:text-white"
+              >
+                Log In
               </Link>
             </div>
           </motion.div>
