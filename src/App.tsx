@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Technology from "./pages/Technology";
+import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopNav from "./components/ScrollToTopNav";
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/technology" element={<Technology />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
 
           {/* Dashboard Routes */}
           <Route path="/dashboard" element={<DashboardLayout><Overview /></DashboardLayout>} />

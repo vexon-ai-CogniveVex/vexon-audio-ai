@@ -35,14 +35,18 @@ async function hashPassword(password: string): Promise<string> {
 
 const api = {
     // Authentication
-    async login(email: string, passwordRaw: string): Promise<ApiResponse<{ user: User, token: string }>> {
+    async login(email: string, passwordRaw: string, captchaToken?: string): Promise<ApiResponse<{ user: User, token: string }>> {
         const password_hash = await hashPassword(passwordRaw);
 
         try {
             const response = await fetch(`${BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password_hash })
+                body: JSON.stringify({
+                    email,
+                    password_hash,
+                    turnstile_token: captchaToken
+                })
             });
 
             const result: ApiResponse<{ user: User, token: string }> = await response.json();
@@ -58,7 +62,7 @@ const api = {
         }
     },
 
-    async signup(payload: any): Promise<ApiResponse<{ user: User, token: string }>> {
+    async signup(payload: any, captchaToken?: string): Promise<ApiResponse<{ user: User, token: string }>> {
         const password_hash = await hashPassword(payload.password);
         const { password, ...otherFields } = payload;
 
@@ -69,7 +73,8 @@ const api = {
                 body: JSON.stringify({
                     ...otherFields,
                     password_hash,
-                    password_hash_confirmation: password_hash
+                    password_hash_confirmation: password_hash,
+                    turnstile_token: captchaToken
                 })
             });
 
@@ -83,6 +88,41 @@ const api = {
         } catch (error) {
             console.error("[API] Registration error:", error);
             return { status: "error", message: "Network connection failed", data: null, code: 500 };
+        }
+    },
+
+    // Email & Messaging
+    async submitContactForm(data: any): Promise<ApiResponse<null>> {
+        try {
+            const response = await fetch(`${BASE_URL}/mail/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    message: data.message,
+                    turnstile_token: data.captchaToken
+                })
+            });
+            return await response.json();
+        } catch (error) {
+            console.error("[API] Contact submit error:", error);
+            return { status: "error", message: "Failed to send message", data: null, code: 500 };
+        }
+    },
+
+    // Maps
+    async getMapPin(address: string): Promise<ApiResponse<any>> {
+        try {
+            const response = await fetch(`${BASE_URL}/maps/pin`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address })
+            });
+            return await response.json();
+        } catch (error) {
+            console.error("[API] Map pin error:", error);
+            return { status: "error", message: "Failed to load map location", data: null, code: 500 };
         }
     },
 
@@ -187,6 +227,43 @@ const api = {
         } catch (error) {
             console.error("[API] Forgot password error:", error);
             return { status: "error", message: "Network connection failed", data: null, code: 500 };
+        }
+    },
+
+    // OAuth Authentication
+    async loginWithGoogle(accessToken: string): Promise<ApiResponse<{ user: User, token: string }>> {
+        try {
+            const response = await fetch(`${BASE_URL}/auth/google/token`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ access_token: accessToken })
+            });
+            const result: ApiResponse<{ user: User, token: string }> = await response.json();
+            if (result.status === "success" && result.data) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(result.data));
+            }
+            return result;
+        } catch (error) {
+            console.error("[API] Google Login error:", error);
+            return { status: "error", message: "Google Authentication failed", data: null, code: 500 };
+        }
+    },
+
+    async loginWithGitHub(accessToken: string): Promise<ApiResponse<{ user: User, token: string }>> {
+        try {
+            const response = await fetch(`${BASE_URL}/auth/github/token`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ access_token: accessToken })
+            });
+            const result: ApiResponse<{ user: User, token: string }> = await response.json();
+            if (result.status === "success" && result.data) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(result.data));
+            }
+            return result;
+        } catch (error) {
+            console.error("[API] GitHub Login error:", error);
+            return { status: "error", message: "GitHub Authentication failed", data: null, code: 500 };
         }
     },
 

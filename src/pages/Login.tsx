@@ -2,23 +2,32 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiMail, FiLock, FiArrowRight, FiActivity } from "react-icons/fi";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import api from "@/lib/api";
 import { toast } from "sonner";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!captchaToken) {
+            toast.error("Please complete the neural handshake (CAPTCHA).");
+            return;
+        }
+
         setIsLoading(true);
 
         try {
-            const resp = await api.login(email, password);
+            const resp = await api.login(email, password, captchaToken);
             if (resp.status === "success") {
                 toast.success("Connection established.");
                 navigate("/dashboard");
@@ -54,6 +63,30 @@ const Login = () => {
                         <h1 className="font-display text-4xl font-bold mb-3">Welcome Back</h1>
                         <p className="text-white/40 font-light mb-10 tracking-wide text-sm uppercase">Re-establish neural connection</p>
 
+                        {/* Social Logins */}
+                        <div className="grid grid-cols-2 gap-4 mb-8">
+                            <button
+                                onClick={() => window.location.href = "https://api.cognivevex.com/api/auth/google/redirect"}
+                                className="flex items-center justify-center gap-3 h-14 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all text-sm font-bold tracking-tight"
+                            >
+                                <FaGoogle className="text-red-500" />
+                                Google
+                            </button>
+                            <button
+                                onClick={() => window.location.href = "https://api.cognivevex.com/api/auth/github/redirect"}
+                                className="flex items-center justify-center gap-3 h-14 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all text-sm font-bold tracking-tight"
+                            >
+                                <FaGithub />
+                                GitHub
+                            </button>
+                        </div>
+
+                        <div className="flex items-center gap-4 mb-8 text-white/10">
+                            <div className="h-px flex-grow bg-white/5" />
+                            <span className="text-[10px] font-bold tracking-[0.2em] uppercase">OR</span>
+                            <div className="h-px flex-grow bg-white/5" />
+                        </div>
+
                         <form className="space-y-6 text-left" onSubmit={handleLogin}>
                             <div className="space-y-2">
                                 <label className="text-[10px] tracking-[0.3em] font-bold text-white/30 uppercase ml-1">Frequency Email</label>
@@ -86,6 +119,15 @@ const Login = () => {
                                         className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white placeholder:text-white/10 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all"
                                     />
                                 </div>
+                            </div>
+
+                            {/* reCAPTCHAHandshake */}
+                            <div className="flex justify-center py-2">
+                                <ReCAPTCHA
+                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Testing key
+                                    onChange={(token) => setCaptchaToken(token)}
+                                    theme="dark"
+                                />
                             </div>
 
                             <button

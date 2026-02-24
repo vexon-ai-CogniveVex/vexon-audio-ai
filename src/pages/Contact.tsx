@@ -4,7 +4,10 @@ import { toast } from "sonner";
 import { FiSend, FiMapPin, FiMail, FiPhone, FiActivity, FiGlobe } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import api from "@/lib/api";
+import ReCAPTCHA from "react-google-recaptcha";
 import contactImage from "@/assets/images/contact_connectivity_waves_1771846672305.png";
+import { useEffect } from "react";
 
 const contactInfo = [
   { icon: FiMail, label: "Neural Interface", value: "protocols@vexon.ai" },
@@ -15,15 +18,46 @@ const contactInfo = [
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [mapData, setMapData] = useState<any>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const fetchMap = async () => {
+      try {
+        const resp = await api.getMapPin("SF-01 Base, California");
+        if (resp.status === "success") {
+          setMapData(resp.data);
+        }
+      } catch (err) {
+        console.error("Failed to load map data");
+      }
+    };
+    fetchMap();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      toast.error("Please complete the neural handshake (CAPTCHA).");
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
-      toast.success("Packet received. Transmission complete.");
-      setForm({ name: "", email: "", message: "" });
+
+    try {
+      const resp = await api.submitContactForm({ ...form, captchaToken });
+      if (resp.status === "success") {
+        toast.success("Packet received. Transmission complete.");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        toast.error(resp.message || "Transmission failed.");
+      }
+    } catch (err) {
+      toast.error("Network interference. Uplink failed.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -125,6 +159,15 @@ const Contact = () => {
                     />
                   </div>
 
+                  {/* reCAPTCHA */}
+                  <div className="flex justify-center py-2">
+                    <ReCAPTCHA
+                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Testing key
+                      onChange={(token) => setCaptchaToken(token)}
+                      theme="dark"
+                    />
+                  </div>
+
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -150,6 +193,59 @@ const Contact = () => {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="pb-32 px-6">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative h-[500px] rounded-[3rem] overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-3xl"
+          >
+            {mapData ? (
+              <iframe
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2)" }}
+                src={mapData.embed_url}
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white/20 uppercase tracking-[0.3em] font-bold">
+                <FiActivity className="animate-pulse mr-4" />
+                Initializing Node Visualization...
+              </div>
+            )}
+
+            <div className="absolute bottom-8 left-8 right-8 md:right-auto md:w-80 p-8 rounded-3xl bg-black/60 border border-white/10 backdrop-blur-xl">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                  <FiMapPin />
+                </div>
+                <div>
+                  <div className="text-[10px] tracking-widest font-bold text-white/40 uppercase">SF-01 Base</div>
+                  <div className="text-sm font-bold">San Francisco, CA</div>
+                </div>
+              </div>
+              <p className="text-xs text-white/40 leading-relaxed mb-6">
+                Strategic operations hub for neural synthesis and audio frequency modulation.
+              </p>
+              {mapData?.maps_link && (
+                <a
+                  href={mapData.maps_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:underline"
+                >
+                  Open in Matrix <FiGlobe size={12} />
+                </a>
+              )}
+            </div>
+          </motion.div>
         </div>
       </section>
 
