@@ -1,10 +1,37 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { FiMail, FiLock, FiArrowRight, FiActivity } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import api from "@/lib/api";
+import { toast } from "sonner";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        try {
+            const resp = await api.login(email, password);
+            if (resp.status === "success") {
+                toast.success("Connection established.");
+                navigate("/dashboard");
+            } else {
+                toast.error(resp.message);
+            }
+        } catch (err) {
+            toast.error("Vocal match failed. Network interference detected.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#050505] text-white">
             <Navbar />
@@ -27,13 +54,16 @@ const Login = () => {
                         <h1 className="font-display text-4xl font-bold mb-3">Welcome Back</h1>
                         <p className="text-white/40 font-light mb-10 tracking-wide text-sm uppercase">Re-establish neural connection</p>
 
-                        <form className="space-y-6 text-left" onSubmit={(e) => e.preventDefault()}>
+                        <form className="space-y-6 text-left" onSubmit={handleLogin}>
                             <div className="space-y-2">
                                 <label className="text-[10px] tracking-[0.3em] font-bold text-white/30 uppercase ml-1">Frequency Email</label>
                                 <div className="relative group">
                                     <FiMail className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" />
                                     <input
                                         type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         placeholder="name@protocol.ai"
                                         className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white placeholder:text-white/10 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all"
                                     />
@@ -49,14 +79,21 @@ const Login = () => {
                                     <FiLock className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" />
                                     <input
                                         type="password"
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                         placeholder="••••••••"
                                         className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white placeholder:text-white/10 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all"
                                     />
                                 </div>
                             </div>
 
-                            <button className="group w-full h-16 rounded-2xl bg-white flex items-center justify-center gap-3 text-black font-display font-bold text-sm tracking-widest uppercase hover:bg-primary transition-colors mt-8">
-                                Initialize Login
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="group w-full h-16 rounded-2xl bg-white flex items-center justify-center gap-3 text-black font-display font-bold text-sm tracking-widest uppercase hover:bg-primary transition-colors mt-8 disabled:opacity-50"
+                            >
+                                {isLoading ? "Connecting..." : "Initialize Login"}
                                 <FiArrowRight className="transition-transform group-hover:translate-x-1" />
                             </button>
                         </form>

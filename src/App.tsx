@@ -16,6 +16,15 @@ import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopNav from "./components/ScrollToTopNav";
 
+// Dashboard Imports
+import DashboardLayout from "./components/dashboard/DashboardLayout";
+import Overview from "./pages/dashboard/Overview";
+import NeuralLab from "./pages/dashboard/NeuralLab";
+import SpectralPro from "./pages/dashboard/SpectralPro";
+import Billing from "./pages/dashboard/Billing";
+import Settings from "./pages/dashboard/Settings";
+import Checkout from "./pages/dashboard/Checkout";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -36,6 +45,15 @@ const App = () => (
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/technology" element={<Technology />} />
+
+          {/* Dashboard Routes */}
+          <Route path="/dashboard" element={<DashboardLayout><Overview /></DashboardLayout>} />
+          <Route path="/dashboard/neural-lab" element={<DashboardLayout><NeuralLab /></DashboardLayout>} />
+          <Route path="/dashboard/spectral-pro" element={<DashboardLayout><SpectralPro /></DashboardLayout>} />
+          <Route path="/dashboard/billing" element={<DashboardLayout><Billing /></DashboardLayout>} />
+          <Route path="/dashboard/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
+          <Route path="/dashboard/checkout/:planSlug" element={<DashboardLayout><Checkout /></DashboardLayout>} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
