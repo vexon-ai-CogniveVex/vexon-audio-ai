@@ -126,6 +126,20 @@ const api = {
         }
     },
 
+    async generateChat(messages: any[]): Promise<ApiResponse<any>> {
+        try {
+            const response = await fetch(`${BASE_URL}/ai/generate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages })
+            });
+            return await response.json();
+        } catch (error) {
+            console.error("[API] Chat generation error:", error);
+            return { status: "error", message: "Neural link failed", data: null, code: 500 };
+        }
+    },
+
     logout() {
         localStorage.removeItem(STORAGE_KEY);
         return {

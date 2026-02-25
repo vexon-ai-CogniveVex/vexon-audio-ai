@@ -12,6 +12,7 @@ const useCases = [
     desc: "Generate hyper-realistic voiceovers and enhance studio-grade podcasts with sub-millisecond precision.",
     stat: "12x",
     statLabel: "Production Velocity",
+    color: "secondary",
   },
   {
     icon: FiBriefcase,
@@ -19,6 +20,7 @@ const useCases = [
     desc: "Scale audio analytics across global infrastructure. Detect sentiment and intent with quantum accuracy.",
     stat: "99.9%",
     statLabel: "Neural Precision",
+    color: "primary",
   },
   {
     icon: FiCast,
@@ -26,13 +28,14 @@ const useCases = [
     desc: "Broadcast-ready mastering and multi-language synthesis for international content distribution.",
     stat: "60+",
     statLabel: "Native Dialects",
+    color: "accent",
   },
 ];
 
 const techSpecs = [
-  { icon: FiLayers, label: "Neural Pipeline", desc: "A modular architecture allowing for custom spectral routing and model injection." },
-  { icon: FiCpu, label: "Zero-Latency PNE", desc: "Proprietary Neural Engine capable of real-time 32-bit float processing." },
-  { icon: FiGlobe, label: "Global Synthesis", desc: "Cross-platform cloud-to-edge synchronization for consistent audio performance." },
+  { icon: FiLayers, label: "Neural Pipeline", desc: "A modular architecture allowing for custom spectral routing and model injection.", color: "primary" },
+  { icon: FiCpu, label: "Zero-Latency PNE", desc: "Proprietary Neural Engine capable of real-time 32-bit float processing.", color: "secondary" },
+  { icon: FiGlobe, label: "Global Synthesis", desc: "Cross-platform cloud-to-edge synchronization for consistent audio performance.", color: "accent" },
 ];
 
 const Product = () => (
@@ -49,10 +52,10 @@ const Product = () => (
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1"
           >
-            <span className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-8 block">Project Vexon</span>
+            <span className="text-[10px] tracking-[0.5em] uppercase text-secondary font-bold mb-8 block">Project Vexon</span>
             <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl mb-10">
               The Architecture of <br />
-              <span className="text-white/30 italic font-light">Pure Sound.</span>
+              <span className="text-white/30 italic font-light text-gradient-accent">Pure Sound.</span>
             </h1>
             <p className="max-w-xl text-white/40 text-xl font-light leading-relaxed mb-12">
               Vexon is more than a tool—it's a high-performance neural processing ecosystem designed to bridge the gap between human creativity and AI precision.
@@ -71,7 +74,7 @@ const Product = () => (
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1 relative"
           >
-            <div className="absolute inset-x-0 h-[200px] bg-primary/20 blur-[100px] opacity-30 rounded-full top-1/2 -translate-y-1/2" />
+            <div className="absolute inset-x-0 h-[200px] bg-secondary/20 blur-[100px] opacity-30 rounded-full top-1/2 -translate-y-1/2" />
             <div className="relative overflow-hidden rounded-[3rem] border border-white/10 p-4 bg-white/5 backdrop-blur-2xl">
               <img src={productImage} alt="Vexon Interface" className="w-full h-auto rounded-[2.5rem] grayscale group-hover:grayscale-0 transition-all duration-700" />
             </div>
@@ -88,7 +91,7 @@ const Product = () => (
             <span className="text-[10px] tracking-[0.4em] uppercase text-primary font-bold mb-6 block">Industrial Utility</span>
             <h2 className="font-display text-5xl md:text-6xl font-bold text-white leading-tight">
               One Engine. <br />
-              <span className="text-white/30 italic">infinite Scenarios.</span>
+              <span className="text-white/30 italic text-gradient-accent">infinite Scenarios.</span>
             </h2>
           </div>
         </div>
@@ -103,7 +106,7 @@ const Product = () => (
               transition={{ delay: i * 0.1, duration: 0.8 }}
               className="group relative flex flex-col h-full rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-12 transition-all hover:bg-white/[0.04]"
             >
-              <div className="mb-12 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/5 text-white/40">
+              <div className={`mb-12 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-${uc.color}/5 text-${uc.color}`}>
                 <uc.icon size={28} />
               </div>
 
@@ -112,7 +115,7 @@ const Product = () => (
 
               <div className="pt-8 border-t border-white/5 flex items-baseline gap-4">
                 <span className="font-display text-4xl font-bold text-white">{uc.stat}</span>
-                <span className="text-[10px] tracking-[0.2em] font-bold text-primary uppercase">{uc.statLabel}</span>
+                <span className={`text-[10px] tracking-[0.2em] font-bold text-${uc.color} uppercase`}>{uc.statLabel}</span>
               </div>
             </motion.div>
           ))}
@@ -139,7 +142,7 @@ const Product = () => (
               transition={{ delay: i * 0.1 }}
               className="text-center group"
             >
-              <div className="mb-8 inline-flex items-center justify-center w-20 h-20 rounded-full border border-white/5 bg-white/[0.02] text-white/40 group-hover:text-primary group-hover:border-primary/50 transition-all duration-500">
+              <div className={`mb-8 inline-flex items-center justify-center w-20 h-20 rounded-full border border-white/5 bg-white/[0.02] text-white/40 group-hover:text-${spec.color} group-hover:border-${spec.color}/50 transition-all duration-500`}>
                 <spec.icon size={32} />
               </div>
               <h3 className="font-display text-xl font-bold text-white mb-4">{spec.label}</h3>

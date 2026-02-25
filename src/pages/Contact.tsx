@@ -9,6 +9,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import contactImage from "@/assets/images/contact_connectivity_waves_1771846672305.png";
 import { useEffect } from "react";
 
+const VITE_RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
 const contactInfo = [
   { icon: FiMail, label: "Neural Interface", value: "protocols@vexon.ai" },
   { icon: FiMapPin, label: "Node Location", value: "SF-01 Base, California" },
@@ -162,7 +164,7 @@ const Contact = () => {
                   {/* reCAPTCHA */}
                   <div className="flex justify-center py-2">
                     <ReCAPTCHA
-                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Testing key
+                      sitekey={VITE_RECAPTCHA_SITE_KEY} // Testing key
                       onChange={(token) => setCaptchaToken(token)}
                       theme="dark"
                     />
@@ -210,7 +212,7 @@ const Contact = () => {
                 width="100%"
                 height="100%"
                 frameBorder="0"
-                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2)" }}
+                style={{ border: 0 }}
                 src={mapData.embed_url}
                 allowFullScreen
               ></iframe>
@@ -220,31 +222,6 @@ const Contact = () => {
                 Initializing Node Visualization...
               </div>
             )}
-
-            <div className="absolute bottom-8 left-8 right-8 md:right-auto md:w-80 p-8 rounded-3xl bg-black/60 border border-white/10 backdrop-blur-xl">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
-                  <FiMapPin />
-                </div>
-                <div>
-                  <div className="text-[10px] tracking-widest font-bold text-white/40 uppercase">SF-01 Base</div>
-                  <div className="text-sm font-bold">San Francisco, CA</div>
-                </div>
-              </div>
-              <p className="text-xs text-white/40 leading-relaxed mb-6">
-                Strategic operations hub for neural synthesis and audio frequency modulation.
-              </p>
-              {mapData?.maps_link && (
-                <a
-                  href={mapData.maps_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:underline"
-                >
-                  Open in Matrix <FiGlobe size={12} />
-                </a>
-              )}
-            </div>
           </motion.div>
         </div>
       </section>

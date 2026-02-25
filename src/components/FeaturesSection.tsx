@@ -14,13 +14,13 @@ const features = [
     icon: FiCpu,
     title: "Quantum Enhancement",
     description: "Reconstruct degraded audio using temporal alignment and spectral deep-cleaning.",
-    color: "purple-400",
+    color: "secondary",
   },
   {
     icon: FiActivity,
     title: "Semantic Analysis",
     description: "Extract emotional intent, subtext, and rhythmic structures from any audio stream instantly.",
-    color: "blue-400",
+    color: "accent",
   },
 ];
 
@@ -65,7 +65,7 @@ const FeaturesSection = () => (
           <span className="text-[10px] tracking-[0.4em] uppercase text-primary font-bold mb-6 block">Capabilities</span>
           <h2 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
             Transcending the <br />
-            <span className="text-white/30 italic">Auditory Horizon.</span>
+            <span className="text-white/30 italic text-gradient-accent">Auditory Horizon.</span>
           </h2>
         </motion.div>
 
@@ -95,7 +95,7 @@ const FeaturesSection = () => (
             className="group relative h-full overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-12 backdrop-blur-3xl transition-colors hover:bg-white/[0.04]"
           >
             {/* Hover glow */}
-            <div className="absolute -inset-px rounded-[2.5rem] bg-gradient-to-b from-primary/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className={`absolute -inset-px rounded-[2.5rem] bg-gradient-to-b from-${f.color}/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100`} />
 
             <div className={`mb-10 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-${f.color}/10 text-${f.color} transition-transform group-hover:scale-110 group-hover:rotate-3`}>
               <f.icon className="text-3xl" />

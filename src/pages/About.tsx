@@ -6,8 +6,8 @@ import aboutImage from "@/assets/images/about_company_mission_abstract_177184664
 
 const values = [
   { icon: FiEye, title: "Total Transparency", desc: "Our neural logic isn't a black box. We prioritize explainability in every generated waveform.", color: "primary" },
-  { icon: FiShield, title: "Hardened Security", desc: "End-to-end encryption for every byte of audio, hosted on SOC 2 Type II infrastructure.", color: "purple-400" },
-  { icon: FiHeart, title: "Ethical Consent", desc: "Voice synthesis requires cryptographic proof of consent. We build with respect for identity.", color: "blue-400" },
+  { icon: FiShield, title: "Hardened Security", desc: "End-to-end encryption for every byte of audio, hosted on SOC 2 Type II infrastructure.", color: "secondary" },
+  { icon: FiHeart, title: "Ethical Consent", desc: "Voice synthesis requires cryptographic proof of consent. We build with respect for identity.", color: "accent" },
   { icon: FiZap, title: "Relentless R&D", desc: "Staying at the bleeding edge of spectral reconstruction and neural synthesis research.", color: "primary" },
 ];
 
@@ -25,10 +25,10 @@ const About = () => (
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1"
           >
-            <span className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-8 block">The Vexon Manifesto</span>
+            <span className="text-[10px] tracking-[0.5em] uppercase text-secondary font-bold mb-8 block">The Vexon Manifesto</span>
             <h1 className="font-display text-6xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-9xl mb-10">
               Sound is <br />
-              <span className="text-white/30 italic font-light">Intelligence.</span>
+              <span className="text-white/30 italic font-light text-gradient-accent">Intelligence.</span>
             </h1>
             <p className="max-w-xl text-white/40 text-xl font-light leading-relaxed">
               We started with a simple belief: that the world's most critical data is audio. We are dedicated to building the infrastructure that lets humanity hear what it's been missing.
@@ -45,8 +45,8 @@ const About = () => (
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             <div className="absolute bottom-12 left-12 right-12">
               <div className="flex items-center gap-4 text-white/60">
-                <FiActivity className="text-primary animate-pulse" />
-                <span className="text-[10px] tracking-[0.2em] font-bold uppercase">System Status: Active</span>
+                <FiActivity className="text-secondary animate-pulse" />
+                <span className="text-[10px] tracking-[0.2em] font-bold uppercase text-gradient-accent">System Status: Active</span>
               </div>
             </div>
           </motion.div>
@@ -57,13 +57,13 @@ const About = () => (
     {/* Values Matrix */}
     <section className="py-40 relative">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-6">
         <div className="mb-24">
-          <span className="text-[10px] tracking-[0.4em] uppercase text-primary font-bold mb-6 block">Our Foundation</span>
+          <span className="text-[10px] tracking-[0.4em] uppercase text-secondary font-bold mb-6 block">Our Foundation</span>
           <h2 className="font-display text-5xl md:text-6xl font-bold text-white leading-tight max-w-2xl">
-            Ethical <span className="text-white/30 italic">Precedents.</span>
+            Ethical <span className="text-white/30 italic text-gradient-accent">Precedents.</span>
           </h2>
         </div>
 
@@ -101,7 +101,7 @@ const About = () => (
 
           <FiShield size={60} className="mx-auto mb-10 text-primary opacity-50" />
           <h3 className="font-display text-4xl md:text-6xl font-bold text-white mb-8 max-w-4xl mx-auto leading-tight">
-            Every synthetic voice is <span className="text-white/30 italic">Permanently Indexed.</span>
+            Every synthetic voice is <span className="text-white/30 italic text-gradient-accent">Permanently Indexed.</span>
           </h3>
           <p className="text-white/40 text-xl font-light leading-relaxed max-w-2xl mx-auto">
             We embed imperceptible neural watermarks in every millisecond of generated audio. Integrity is built into the bitstream, ensuring total traceability and ecosystem trust.

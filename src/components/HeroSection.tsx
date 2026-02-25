@@ -37,7 +37,19 @@ const HeroSection = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]"
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-accent/5 rounded-full blur-[150px]"
         />
         <motion.div
           animate={{
@@ -65,8 +77,8 @@ const HeroSection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-white/70 backdrop-blur-md">
-              <span className="h-1 w-1 rounded-full bg-primary shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-              THE FUTURE OF AUDIO INTELLIGENCE
+              <span className="h-1 w-1 rounded-full bg-secondary shadow-[0_0_8px_rgba(255,100,100,0.8)]" />
+              <span className="text-gradient-accent">THE FUTURE OF AUDIO INTELLIGENCE</span>
             </span>
           </motion.div>
 
@@ -76,7 +88,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="mt-8 font-display text-6xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-9xl"
           >
-            Sculpting <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-blue-400">Silence</span>
+            Sculpting <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">Silence</span>
             <br />
             into Soul.
           </motion.h1>
@@ -99,7 +111,7 @@ const HeroSection = () => {
             <Link to="/signup" className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-10 py-5 font-display text-sm font-bold text-black transition-all hover:pr-12 active:scale-95">
               <span>Initialize Vexon</span>
               <FiArrowRight className="text-lg transition-transform group-hover:translate-x-1" />
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary to-purple-500 scale-x-0 transition-transform group-hover:scale-x-100" />
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent scale-x-0 transition-transform group-hover:scale-x-100" />
             </Link>
           </motion.div>
         </motion.div>

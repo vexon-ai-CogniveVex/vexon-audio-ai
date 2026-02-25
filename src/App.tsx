@@ -16,6 +16,8 @@ import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopNav from "./components/ScrollToTopNav";
+import ChatWidget from "./components/ChatWidget";
+import CookieConsent from "./components/CookieConsent";
 
 // Dashboard Imports
 import DashboardLayout from "./components/dashboard/DashboardLayout";
@@ -58,6 +60,8 @@ const App = () => (
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ChatWidget />
+        <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

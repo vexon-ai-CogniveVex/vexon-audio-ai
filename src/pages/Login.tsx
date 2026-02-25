@@ -9,6 +9,8 @@ import api from "@/lib/api";
 import { toast } from "sonner";
 import ReCAPTCHA from "react-google-recaptcha";
 
+const VITE_RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -124,7 +126,7 @@ const Login = () => {
                             {/* reCAPTCHAHandshake */}
                             <div className="flex justify-center py-2">
                                 <ReCAPTCHA
-                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Testing key
+                                    sitekey={VITE_RECAPTCHA_SITE_KEY} // Testing key
                                     onChange={(token) => setCaptchaToken(token)}
                                     theme="dark"
                                 />
