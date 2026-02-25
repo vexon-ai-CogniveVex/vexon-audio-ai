@@ -6,7 +6,7 @@ import Logo from "./Logo";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Vexon AI", path: "/product" },
+  { label: "Technology", path: "/technology" },
   { label: "Features", path: "/features" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
