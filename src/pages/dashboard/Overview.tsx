@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
     FiActivity,
@@ -9,6 +10,7 @@ import {
     FiPlay,
     FiTrendingUp
 } from "react-icons/fi";
+import api, { User } from "@/lib/api";
 
 const stats = [
     { label: "Neural Computations", value: "1,284", change: "+12.5%", icon: FiZap, color: "text-primary" },
@@ -24,6 +26,13 @@ const recentGenerations = [
 ];
 
 const Overview = () => {
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const session = api.getCurrentUser();
+        if (session) setUser(session.user);
+    }, []);
+
     return (
         <div className="space-y-10">
             {/* Welcome Hero */}
@@ -31,8 +40,9 @@ const Overview = () => {
                 <div className="relative z-10 max-w-2xl">
                     <h1 className="font-display text-4xl md:text-5xl font-bold mb-6">
                         Protocol Initialized. <br />
-                        <span className="text-white/30 italic">Welcome back, Operator.</span>
+                        <span className="text-white/30 italic">Welcome back, {user?.first_name || user?.username || "Operator"}.</span>
                     </h1>
+
                     <p className="text-white/40 text-lg font-light leading-relaxed mb-10">
                         Systems are running at optimal efficiency. Neural clusters are ready for high-fidelity audio synthesis.
                     </p>

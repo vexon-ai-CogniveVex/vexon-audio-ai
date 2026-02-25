@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiMail, FiArrowRight, FiActivity, FiArrowLeft } from "react-icons/fi";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
 import api from "@/lib/api";
 import { toast } from "sonner";
 
@@ -30,12 +30,10 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white">
-            <Navbar />
-
-            <div className="relative pt-48 pb-32 flex items-center justify-center px-6">
+        <div className="min-h-screen bg-[#050505] text-white flex flex-col">
+            <div className="relative flex-grow flex items-center justify-center px-6 py-20 overflow-hidden">
                 {/* Decorative Background */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] opacity-50" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px] opacity-30" />
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -43,13 +41,13 @@ const ForgotPassword = () => {
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="relative w-full max-w-md"
                 >
-                    <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.03] p-10 md:p-14 backdrop-blur-3xl shadow-2xl text-center">
-                        <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 mb-8 border border-white/10">
-                            <FiActivity className="text-primary text-2xl" />
-                        </div>
+                    <div className="flex flex-col items-center mb-12">
+                        <Logo size="lg" className="mb-8" />
+                        <h1 className="font-display text-4xl font-bold mb-3 tracking-tighter">Recover Protocol</h1>
+                        <p className="text-white/40 font-light mb-10 tracking-[0.3em] text-[10px] uppercase">Re-initialize neural frequency</p>
+                    </div>
 
-                        <h1 className="font-display text-4xl font-bold mb-3">Recover Protocol</h1>
-                        <p className="text-white/40 font-light mb-10 tracking-wide text-sm uppercase">Re-initialize neural frequency</p>
+                    <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.03] p-10 md:p-14 backdrop-blur-3xl shadow-2xl">
 
                         <form className="space-y-6 text-left" onSubmit={handleSubmit}>
                             <div className="space-y-2">

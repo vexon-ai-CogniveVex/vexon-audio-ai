@@ -5,7 +5,7 @@ import { FiArrowRight, FiActivity } from "react-icons/fi";
 const CTASection = () => (
   <section className="relative overflow-hidden py-40 bg-[#050505]">
     {/* Dynamic Background */}
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px] opacity-50" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[160px] opacity-50" />
 
     <div className="container relative z-10 mx-auto px-6">
       <motion.div
@@ -41,7 +41,7 @@ const CTASection = () => (
           </motion.div>
 
           <h2 className="mx-auto max-w-4xl font-display text-5xl font-bold leading-[1.1] text-white md:text-8xl">
-            The era of <span className="text-white/30 italic">Pure Sound</span> begins now.
+            The era of <span className="text-white/30 italic text-gradient-accent">Pure Sound</span> begins now.
           </h2>
 
           <p className="mx-auto mt-10 max-w-2xl text-xl text-white/40 font-light leading-relaxed">
@@ -56,7 +56,7 @@ const CTASection = () => (
             className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6"
           >
             <Link
-              to="/signup"
+              to="/product"
               className="group relative inline-flex items-center gap-4 rounded-full bg-white px-12 py-6 font-display text-lg font-bold text-black transition-all hover:shadow-[0_0_60px_rgba(255,255,255,0.3)]"
             >
               Secure Encryption Node

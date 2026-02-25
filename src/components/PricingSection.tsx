@@ -32,28 +32,17 @@ const plans = [
 const PricingSection = () => (
   <section className="relative py-40 bg-[#0a0a0a] overflow-hidden">
     {/* Decorative Gradients */}
-    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]" />
-    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px]" />
+    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px]" />
+    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
 
     <div className="container relative z-10 mx-auto px-6">
       <div className="text-center mb-24">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-4 block"
-        >
+        <span className="text-[10px] tracking-[0.5em] uppercase text-secondary font-bold mb-4 block" >
           Investment
-        </motion.span>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="font-display text-5xl md:text-6xl font-bold text-white mb-6"
-        >
-          Choose your <span className="text-white/30 italic">Frequency.</span>
-        </motion.h2>
+        </span>
+        <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+          Choose your <span className="text-white/30 italic text-gradient-accent">Frequency.</span>
+        </h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +97,7 @@ const PricingSection = () => (
             </ul>
 
             <Link
-              to="/signup"
+              to="/product"
               className={`w-full rounded-2xl py-5 text-sm font-bold tracking-[0.1em] uppercase transition-all flex items-center justify-center gap-2 ${plan.popular
                 ? "bg-white text-black hover:bg-primary transition-colors"
                 : "bg-white/5 text-white border border-white/10 hover:bg-white/10"

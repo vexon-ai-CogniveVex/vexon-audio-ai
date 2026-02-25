@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiMail, FiLock, FiArrowRight, FiActivity } from "react-icons/fi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
 import api from "@/lib/api";
 import { toast } from "sonner";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -44,12 +44,10 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white">
-            <Navbar />
-
-            <div className="relative pt-48 pb-32 flex items-center justify-center px-6">
+        <div className="min-h-screen bg-[#050505] text-white flex flex-col">
+            <div className="relative flex-grow flex items-center justify-center px-6 py-20 overflow-hidden">
                 {/* Decorative Background */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] opacity-50" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px] opacity-30" />
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -57,13 +55,13 @@ const Login = () => {
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="relative w-full max-w-md"
                 >
-                    <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.03] p-10 md:p-14 backdrop-blur-3xl shadow-2xl text-center">
-                        <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 mb-8 shadow-2xl shadow-primary/20">
-                            <FiActivity className="text-white text-2xl" />
-                        </div>
+                    <div className="flex flex-col items-center mb-12">
+                        <Logo size="lg" className="mb-8" />
+                        <h1 className="font-display text-4xl font-bold mb-3 tracking-tighter">Welcome Back</h1>
+                        <p className="text-white/40 font-light tracking-[0.3em] text-[10px] uppercase">Re-establish neural connection</p>
+                    </div>
 
-                        <h1 className="font-display text-4xl font-bold mb-3">Welcome Back</h1>
-                        <p className="text-white/40 font-light mb-10 tracking-wide text-sm uppercase">Re-establish neural connection</p>
+                    <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.03] p-10 md:p-14 backdrop-blur-3xl shadow-2xl">
 
                         {/* Social Logins */}
                         <div className="grid grid-cols-2 gap-4 mb-8">

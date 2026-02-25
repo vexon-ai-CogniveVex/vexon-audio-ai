@@ -1,19 +1,23 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-    FiUser,
-    FiLock,
-    FiGlobe,
-    FiShield,
-    FiBell,
-    FiMail,
-    FiMonitor,
-    FiCamera
-} from "react-icons/fi";
+import { useState, useEffect } from "react";
+import api, { User } from "@/lib/api";
 import { toast } from "sonner";
+import { FiUser, FiMail, FiCamera, FiShield, FiLock, FiBell, FiMonitor, FiGlobe } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const Settings = () => {
+    const [user, setUser] = useState<User | null>(null);
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
     const [notifications, setNotifications] = useState(true);
+
+    useEffect(() => {
+        const session = api.getCurrentUser();
+        if (session) {
+            setUser(session.user);
+            setFullName(session.user.first_name ? `${session.user.first_name} ${session.user.last_name || ''}` : session.user.username);
+            setEmail(session.user.email);
+        }
+    }, []);
 
     const handleSave = () => {
         toast.success("Settings synchronized with the neural core.");
@@ -36,15 +40,19 @@ const Settings = () => {
                     <section className="p-10 rounded-[3rem] border border-white/5 bg-white/[0.01] space-y-10">
                         <div className="flex items-center gap-8 border-b border-white/5 pb-10">
                             <div className="relative group cursor-pointer">
-                                <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-2xl">
-                                    <FiUser className="text-white text-4xl" />
+                                <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-2xl overflow-hidden">
+                                    {user?.avatar ? (
+                                        <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <FiUser className="text-white text-4xl" />
+                                    )}
                                 </div>
                                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/60 rounded-[2rem] transition-all">
                                     <FiCamera className="text-white" />
                                 </div>
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold mb-2 uppercase tracking-wide italic">Protocol_User_01</h3>
+                                <h3 className="text-xl font-bold mb-2 uppercase tracking-wide italic">{user?.username || "Protocol_User"}</h3>
                                 <p className="text-white/20 text-xs font-bold tracking-widest uppercase">Public Node Identity</p>
                             </div>
                         </div>
@@ -54,18 +62,31 @@ const Settings = () => {
                                 <label className="text-[10px] tracking-widest uppercase text-white/20 font-bold ml-1">Entity Name</label>
                                 <div className="relative group">
                                     <FiUser className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20" />
-                                    <input type="text" placeholder="John Doe" className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white focus:border-primary/40 outline-none transition-all" />
+                                    <input
+                                        type="text"
+                                        value={fullName}
+                                        onChange={(e) => setFullName(e.target.value)}
+                                        placeholder="John Doe"
+                                        className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white focus:border-primary/40 outline-none transition-all"
+                                    />
                                 </div>
                             </div>
                             <div className="space-y-3">
                                 <label className="text-[10px] tracking-widest uppercase text-white/20 font-bold ml-1">Frequency Address</label>
                                 <div className="relative group">
                                     <FiMail className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20" />
-                                    <input type="email" placeholder="john@protocol.ai" className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white focus:border-primary/40 outline-none transition-all" />
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="john@protocol.ai"
+                                        className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white focus:border-primary/40 outline-none transition-all"
+                                    />
                                 </div>
                             </div>
                         </div>
                     </section>
+
 
                     {/* Security Section */}
                     <section className="p-10 rounded-[3rem] border border-white/5 bg-white/[0.01] space-y-10">

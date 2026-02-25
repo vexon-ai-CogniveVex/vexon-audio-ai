@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const WaveformBar = ({ delay, height, isActive }: { delay: number; height: number; isActive: boolean }) => (
   <motion.div
-    className="rounded-full bg-gradient-to-t from-primary via-purple-500 to-blue-400"
+    className="rounded-full bg-gradient-to-t from-primary via-secondary to-accent"
     style={{
       width: 4,
     }}
@@ -28,7 +28,7 @@ const DemoSection = () => {
   return (
     <section className="relative py-40 bg-[#050505] overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="text-center mb-24">
@@ -98,8 +98,8 @@ const DemoSection = () => {
               {/* Controls Layout */}
               <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12 border-t border-white/5 pt-12">
                 <Link to="/technology" className="text-left group/text">
-                  <h3 className="text-white font-display text-xl font-bold mb-2 group-hover/text:text-primary transition-colors">Neural Master Engine</h3>
-                  <p className="text-white/40 font-light underline underline-offset-4 decoration-white/10 group-hover/text:decoration-primary/30">48kHz / 32-bit Float Processing</p>
+                  <h3 className="text-white font-display text-xl font-bold mb-2 group-hover/text:text-secondary transition-colors">Neural Master Engine</h3>
+                  <p className="text-white/40 font-light underline underline-offset-4 decoration-white/10 group-hover/text:decoration-secondary/30">48kHz / 32-bit Float Processing</p>
                 </Link>
 
                 <motion.button
@@ -132,10 +132,10 @@ const DemoSection = () => {
                 </motion.button>
 
                 <div className="flex items-center gap-6">
-                  <button className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-white/10 active:scale-95">
+                  <Link to="/product" className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-white/10 active:scale-95">
                     <FiUpload className="text-lg" />
                     Load Workspace
-                  </button>
+                  </Link>
                   <div className="hidden lg:block w-px h-10 bg-white/10" />
                   <p className="hidden lg:block text-[10px] text-white/20 tracking-widest uppercase">
                     Ready for <br /> Injection

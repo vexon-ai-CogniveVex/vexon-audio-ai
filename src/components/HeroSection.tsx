@@ -108,7 +108,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="mt-14 flex flex-col items-center gap-6 sm:flex-row sm:justify-center"
           >
-            <Link to="/signup" className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-10 py-5 font-display text-sm font-bold text-black transition-all hover:pr-12 active:scale-95">
+            <Link to="/product" className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-10 py-5 font-display text-sm font-bold text-black transition-all hover:pr-12 active:scale-95">
               <span>Initialize Vexon</span>
               <FiArrowRight className="text-lg transition-transform group-hover:translate-x-1" />
               <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent scale-x-0 transition-transform group-hover:scale-x-100" />

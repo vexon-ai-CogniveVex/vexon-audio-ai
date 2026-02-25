@@ -13,6 +13,8 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Technology from "./pages/Technology";
 import AuthCallback from "./pages/AuthCallback";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopNav from "./components/ScrollToTopNav";
@@ -27,6 +29,8 @@ import SpectralPro from "./pages/dashboard/SpectralPro";
 import Billing from "./pages/dashboard/Billing";
 import Settings from "./pages/dashboard/Settings";
 import Checkout from "./pages/dashboard/Checkout";
+
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -49,14 +53,17 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/technology" element={<Technology />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsConditions />} />
 
           {/* Dashboard Routes */}
-          <Route path="/dashboard" element={<DashboardLayout><Overview /></DashboardLayout>} />
-          <Route path="/dashboard/neural-lab" element={<DashboardLayout><NeuralLab /></DashboardLayout>} />
-          <Route path="/dashboard/spectral-pro" element={<DashboardLayout><SpectralPro /></DashboardLayout>} />
-          <Route path="/dashboard/billing" element={<DashboardLayout><Billing /></DashboardLayout>} />
-          <Route path="/dashboard/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
-          <Route path="/dashboard/checkout/:planSlug" element={<DashboardLayout><Checkout /></DashboardLayout>} />
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout><Overview /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/dashboard/neural-lab" element={<ProtectedRoute><DashboardLayout><NeuralLab /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/dashboard/spectral-pro" element={<ProtectedRoute><DashboardLayout><SpectralPro /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/dashboard/billing" element={<ProtectedRoute><DashboardLayout><Billing /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/dashboard/settings" element={<ProtectedRoute><DashboardLayout><Settings /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/dashboard/checkout/:planSlug" element={<ProtectedRoute><DashboardLayout><Checkout /></DashboardLayout></ProtectedRoute>} />
+
 
           <Route path="*" element={<NotFound />} />
         </Routes>

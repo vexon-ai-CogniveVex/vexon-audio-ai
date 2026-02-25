@@ -13,8 +13,8 @@ const VITE_RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const contactInfo = [
   { icon: FiMail, label: "Neural Interface", value: "protocols@vexon.ai" },
-  { icon: FiMapPin, label: "Node Location", value: "SF-01 Base, California" },
-  { icon: FiPhone, label: "Secure Line", value: "+1 (888) VEXON-AI" },
+  { icon: FiMapPin, label: "Node Location", value: "90 Broad St, New York, NY 10004" },
+  { icon: FiPhone, label: "Secure Line", value: "+12126845973" },
 ];
 
 const Contact = () => {
@@ -26,7 +26,7 @@ const Contact = () => {
   useEffect(() => {
     const fetchMap = async () => {
       try {
-        const resp = await api.getMapPin("SF-01 Base, California");
+        const resp = await api.getMapPin("90 Broad St, New York, NY 10004, United States");
         if (resp.status === "success") {
           setMapData(resp.data);
         }

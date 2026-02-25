@@ -1,19 +1,20 @@
 import { motion } from "framer-motion";
 import { FiMic, FiHeadphones, FiBarChart, FiZap, FiGlobe, FiShield, FiActivity, FiFileText, FiMessageSquare } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import featuresImage from "@/assets/images/features_neural_soundscape_1771846610136.png";
 
 const features = [
   { icon: FiMic, title: "Neural Voice Synthesis", desc: "Craft hyper-realistic synthetic voices with nuanced emotional control and multi-dialect capabilities.", category: "Generation", size: "large", color: "primary" },
-  { icon: FiGlobe, title: "Global Dubbing", desc: "Seamlessly translate and dub content while preserving the original speaker's unique vocal identity.", category: "Generation", size: "small", color: "purple-400" },
-  { icon: FiActivity, title: "Rhythmic Alignment", desc: "Automated temporal correction for perfectly synced audio-to-video or beat-matched loops.", category: "Generation", size: "small", color: "blue-400" },
-  { icon: FiShield, title: "Quantum Filtering", desc: "Remove complex environmental noise and interference with proprietary neural cleaning algorithms.", category: "Enhancement", size: "small", color: "primary" },
-  { icon: FiZap, title: "Autonomous Mastering", desc: "Elevate your audio to studio standards with AI that understands genre-specific spectral dynamics.", category: "Enhancement", size: "large", color: "purple-400" },
-  { icon: FiFileText, title: "Adaptive Restoration", desc: "Repair clipped or degraded samples using deep-learning spectral reconstruction techniques.", category: "Enhancement", size: "small", color: "blue-400" },
-  { icon: FiBarChart, title: "Sentiment Analysis", desc: "Decode the subtext of any conversation with real-time emotional and psychological profiling.", category: "Intelligence", size: "large", color: "primary" },
-  { icon: FiActivity, title: "NPU Compliance", desc: "Automated audits for regulatory standards across finance, healthcare, and security sectors.", category: "Intelligence", size: "small", color: "purple-400" },
-  { icon: FiMessageSquare, title: "Semantic Transcribe", desc: "Context-aware transcription that distinguishes intent and speaker hierarchy with 99% accuracy.", category: "Intelligence", size: "small", color: "blue-400" },
+  { icon: FiGlobe, title: "Global Dubbing", desc: "Seamlessly translate and dub content while preserving the original speaker's unique vocal identity.", category: "Generation", size: "small", color: "secondary" },
+  { icon: FiActivity, title: "Rhythmic Alignment", desc: "Automated temporal correction for perfectly synced audio-to-video or beat-matched loops.", category: "Generation", size: "small", color: "accent" },
+  { icon: FiShield, title: "Quantum Filtering", desc: "Remove complex environmental noise and interference with proprietary neural cleaning algorithms.", category: "Enhancement", size: "small", color: "secondary" },
+  { icon: FiZap, title: "Autonomous Mastering", desc: "Elevate your audio to studio standards with AI that understands genre-specific spectral dynamics.", category: "Enhancement", size: "large", color: "accent" },
+  { icon: FiFileText, title: "Adaptive Restoration", desc: "Repair clipped or degraded samples using deep-learning spectral reconstruction techniques.", category: "Enhancement", size: "small", color: "primary" },
+  { icon: FiBarChart, title: "Sentiment Analysis", desc: "Decode the subtext of any conversation with real-time emotional and psychological profiling.", category: "Intelligence", size: "large", color: "accent" },
+  { icon: FiActivity, title: "NPU Compliance", desc: "Automated audits for regulatory standards across finance, healthcare, and security sectors.", category: "Intelligence", size: "small", color: "primary" },
+  { icon: FiMessageSquare, title: "Semantic Transcribe", desc: "Context-aware transcription that distinguishes intent and speaker hierarchy with 99% accuracy.", category: "Intelligence", size: "small", color: "secondary" },
 ];
 
 const containerVariants = {
@@ -57,10 +58,10 @@ const Features = () => (
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-4xl"
         >
-          <span className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-6 block">The Tech Stack</span>
+          <span className="text-[10px] tracking-[0.5em] uppercase text-secondary font-bold mb-6 block">The Tech Stack</span>
           <h1 className="font-display text-6xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-9xl mb-8">
             Audio <br />
-            <span className="text-white/30 italic">Redefined.</span>
+            <span className="text-white/30 italic text-gradient-accent">Redefined.</span>
           </h1>
           <p className="max-w-xl text-white/40 text-xl font-light leading-relaxed">
             From the core neural engine to the final spectral output, Vexon provides a total ecosystem for high-fidelity audio intelligence.
@@ -116,9 +117,9 @@ const Features = () => (
           className="max-w-2xl mx-auto"
         >
           <h2 className="font-display text-4xl font-bold mb-8 text-white">Ready to witness the power?</h2>
-          <button className="rounded-full bg-white px-10 py-5 font-bold text-black hover:bg-primary transition-colors tracking-widest uppercase text-sm">
+          <Link to="/product" className="inline-block rounded-full bg-white px-10 py-5 font-bold text-black hover:bg-primary transition-colors tracking-widest uppercase text-sm">
             View Live Architecture
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>
