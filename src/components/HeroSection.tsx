@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import heroImage from "@/assets/images/hero_abstract_audio_ai_1771846585741.png";
+import heroImage from "/images/hero.webp";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiPlayCircle } from "react-icons/fi";
 

@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
-import { FiEye, FiShield, FiHeart, FiZap, FiActivity } from "react-icons/fi";
+import { FiActivity } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import aboutImage from "@/assets/images/about_company_mission_abstract_1771846645347.png";
+import aboutImage from "/images/about.webp";
+import FiEye from "/images/about1.webp";
+import FiShield from "/images/about2.webp";
+import FiHeart from "/images/about3.webp";
+import FiZap from "/images/about4.webp";
 
 const values = [
   { icon: FiEye, title: "Total Transparency", desc: "Our neural logic isn't a black box. We prioritize explainability in every generated waveform.", color: "primary" },
@@ -39,7 +43,7 @@ const About = () => (
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="flex-1 h-[600px] relative overflow-hidden rounded-[4rem] border border-white/10"
+            className="flex-1 h-[600px] relative overflow rounded-[4rem] border border-white/10"
           >
             <img src={aboutImage} alt="Mission Abstract" className="absolute inset-0 w-full h-full object-cover scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -78,7 +82,7 @@ const About = () => (
               className="group relative flex flex-col h-full rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-10 transition-all hover:bg-white/[0.04] hover:border-white/10"
             >
               <div className={`mb-10 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-${v.color}/10 text-${v.color}`}>
-                <v.icon size={26} />
+                <img src={v.icon} alt={v.title} />
               </div>
               <h3 className="font-display text-xl font-bold text-white mb-4">{v.title}</h3>
               <p className="text-white/30 font-light leading-relaxed text-sm flex-grow">{v.desc}</p>
@@ -99,7 +103,7 @@ const About = () => (
         >
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-          <FiShield size={60} className="mx-auto mb-10 text-primary opacity-50" />
+          <img src={FiShield} alt="FiShield" className="mx-auto mb-10 text-primary opacity-50 w-40 h-auto" />
           <h3 className="font-display text-4xl md:text-6xl font-bold text-white mb-8 max-w-4xl mx-auto leading-tight">
             Every synthetic voice is <span className="text-white/30 italic text-gradient-accent">Permanently Indexed.</span>
           </h3>

@@ -1,9 +1,18 @@
 import { motion } from "framer-motion";
-import { FiMic, FiHeadphones, FiBarChart, FiZap, FiGlobe, FiShield, FiActivity, FiFileText, FiMessageSquare } from "react-icons/fi";
+import { FiHeadphones } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import featuresImage from "@/assets/images/features_neural_soundscape_1771846610136.png";
+import featuresImage from "/images/features.webp";
+import FiMic from "/images/icon.webp";
+import FiGlobe from "/images/icon2.webp";
+import FiActivity from "/images/icon3.webp";
+import FiShield from "/images/icon4.webp";
+import FiZap from "/images/icon5.webp";
+import FiFileText from "/images/icon6.webp";
+import FiBarChart from "/images/icon7.webp";
+import FiMessageSquare from "/images/icon8.webp";
+
 
 const features = [
   { icon: FiMic, title: "Neural Voice Synthesis", desc: "Craft hyper-realistic synthetic voices with nuanced emotional control and multi-dialect capabilities.", category: "Generation", size: "large", color: "primary" },
@@ -47,9 +56,17 @@ const Features = () => (
     {/* Cinematic Hero */}
     <section className="relative pt-48 pb-32 overflow-hidden">
       {/* Background Graphic */}
-      <div className="absolute top-0 right-0 w-full h-full opacity-20 blur-[100px] pointer-events-none">
-        <img src={featuresImage} alt="" className="object-cover w-full h-full scale-125 rotate-12" />
+
+      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/30 to-transparent z-10" />
+        <img 
+          src={featuresImage} 
+          alt="Features Showcase" 
+          className="object-cover w-full h-full opacity-40" 
+        />
       </div>
+
+
 
       <div className="container relative z-10 mx-auto px-6">
         <motion.div
@@ -89,7 +106,7 @@ const Features = () => (
             >
               <div className="flex items-start justify-between mb-12">
                 <div className={`w-14 h-14 rounded-2xl bg-${f.color}/10 flex items-center justify-center text-${f.color}`}>
-                  <f.icon size={28} />
+                  <img src={f.icon} alt={f.title} />
                 </div>
                 <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/20">
                   {f.category}

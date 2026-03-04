@@ -1,7 +1,10 @@
-import { FiCpu, FiMusic, FiActivity, FiArrowRight, FiX, FiCheck, FiZap } from "react-icons/fi";
+import { FiArrowRight, FiX, FiCheck, FiZap } from "react-icons/fi";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import featuresImage from "@/assets/images/features_neural_soundscape_1771846610136.png";
+import FiMusic from "/images/capability.webp";
+import FiCpu from "/images/capability2.webp";
+import FiActivity from "/images/capability3.webp";
 
 const features = [
   {
@@ -134,7 +137,7 @@ const FeaturesSection = () => {
               <div className={`absolute -inset-px rounded-[2.5rem] bg-gradient-to-b from-${f.color}/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100`} />
 
               <div className={`mb-10 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-${f.color}/10 text-${f.color} transition-transform group-hover:scale-110 group-hover:rotate-3`}>
-                <f.icon className="text-3xl" />
+                <img src={f.icon} alt="" />
               </div>
 
               <h3 className="mb-6 font-display text-2xl font-bold text-white">
@@ -182,7 +185,7 @@ const FeaturesSection = () => {
               <div className="grid md:grid-cols-2">
                 <div className="p-12 md:p-16 border-b md:border-b-0 md:border-r border-white/5">
                   <div className={`mb-10 inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-${selectedFeature.color}/10 text-${selectedFeature.color}`}>
-                    <selectedFeature.icon size={40} />
+                    <img src={selectedFeature.icon} alt="" />
                   </div>
                   <span className={`text-[10px] tracking-[0.4em] uppercase text-${selectedFeature.color} font-bold mb-6 block`}>{selectedFeature.details.tag}</span>
                   <h2 className="font-display text-4xl font-bold text-white mb-8 leading-tight">{selectedFeature.title}</h2>

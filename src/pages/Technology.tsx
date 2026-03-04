@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { FiCpu, FiActivity, FiZap, FiLayers, FiRadio, FiTerminal, FiDatabase } from "react-icons/fi";
+import { FiActivity, FiZap, FiRadio, FiTerminal } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FiCpu from "/images/protocol.webp";
+import FiLayers from "/images/protocol2.webp";
+import FiDatabase from "/images/protocol3.webp";
 
 const techPillars = [
     {
@@ -9,21 +12,24 @@ const techPillars = [
         title: "Neural Synergy Engine",
         desc: "A distributed neural architecture that processes audio packets with quantum-level precision, enabling real-time voice synthesis and spectral reconstruction.",
         specs: ["Latency: < 0.5ms", "Bit-depth: 32-bit Float", "Architecture: Transformer-based"],
-        color: "primary"
+        color: "primary",
+        image: "/images/protocol4.webp"
     },
     {
         icon: FiLayers,
         title: "Temporal Alignment Protocol",
         desc: "Proprietary algorithms that align phasing and transient responses across multiple audio streams, ensuring perfect synchronization even in complex environments.",
         specs: ["Jitter Reduction: 99.9%", "Sync Accuracy: Sample-perfect", "Buffer Type: Zero-delay"],
-        color: "secondary"
+        color: "secondary",
+        image: "/images/protocol5.webp"
     },
     {
         icon: FiDatabase,
         title: "Spectral Deep-Learning",
         desc: "Advanced restoration models trained on petabytes of high-fidelity audio data to identify and remove noise while preserving original harmonic content.",
         specs: ["Noise Reduction: -60dB+", "Harmonic Retention: 100%", "Resolution: up to 192kHz"],
-        color: "accent"
+        color: "accent",
+        image: "/images/protocol6.webp"
     }
 ];
 
@@ -71,7 +77,7 @@ const Technology = () => {
                             >
                                 <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
                                     <div className={`w-16 h-16 rounded-2xl bg-${pillar.color}/10 flex items-center justify-center text-${pillar.color} mb-10 border border-white/10 group-hover:border-${pillar.color}/50 transition-colors`}>
-                                        <pillar.icon size={32} />
+                                        <img src={pillar.icon} alt={pillar.title} />
                                     </div>
                                     <h2 className={`font-display text-4xl font-bold text-white mb-6 underline decoration-${pillar.color}/30 decoration-4 underline-offset-8`}>
                                         {pillar.title}
@@ -89,9 +95,7 @@ const Technology = () => {
                                 </div>
                                 <div className="flex-1 relative w-full aspect-video rounded-[3rem] overflow-hidden border border-white/10 bg-white/5 group">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-50" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <FiActivity size={120} className="text-white/[0.03] animate-pulse" />
-                                    </div>
+                                    <img src={pillar.image} alt={pillar.title} className="absolute inset-0 w-full h-full object-cover" />
                                 </div>
                             </motion.div>
                         ))}
