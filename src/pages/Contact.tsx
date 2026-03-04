@@ -12,7 +12,7 @@ import { useEffect } from "react";
 const VITE_RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const contactInfo = [
-  { icon: FiMail, label: "Neural Interface", value: "protocols@vexon.ai" },
+  { icon: FiMail, label: "Neural Interface", value: "help@cognivevex.com" },
   { icon: FiMapPin, label: "Node Location", value: "90 Broad St, New York, NY 10004" },
   { icon: FiPhone, label: "Secure Line", value: "+12126845973" },
 ];
