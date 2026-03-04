@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FiLayers, FiZap, FiGlobe, FiArrowRight, FiUsers, FiBriefcase, FiCast, FiCpu, FiDatabase, FiActivity, FiServer } from "react-icons/fi";
+import { FiLayers, FiZap, FiGlobe, FiArrowRight, FiCpu, FiDatabase, FiActivity, FiServer } from "react-icons/fi";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import productImage from "@/assets/images/product_sleek_interface_abstract_1771846626569.png";
+import productImage from "/images/product.webp";
+import FiUsers from "/images/product1.webp";
+import FiBriefcase from "/images/product2.webp";
+import FiCast from "/images/product3.webp";
 
 const useCases = [
   {
@@ -222,7 +225,7 @@ const Product = () => (
               className="group relative flex flex-col h-full rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-12 transition-all hover:bg-white/[0.04]"
             >
               <div className={`mb-12 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-${uc.color}/5 text-${uc.color}`}>
-                <uc.icon size={28} />
+                <img src={uc.icon} alt={uc.label} />
               </div>
 
               <h3 className="font-display text-2xl font-bold text-white mb-4">{uc.label}</h3>
