@@ -53,6 +53,7 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/technology" element={<Technology />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/complete" element={<AuthCallback />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsConditions />} />
 
