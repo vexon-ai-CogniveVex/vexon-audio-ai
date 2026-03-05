@@ -244,6 +244,34 @@ const api = {
         }
     },
 
+    // OAuth Completion (backend redirects with Sanctum token)
+    async completeOAuthLogin(token: string): Promise<ApiResponse<{ user: User, token: string }>> {
+        try {
+            // Store token temporarily so getAuthHeader() works for the profile fetch
+            const tempSession = { user: {} as User, token };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tempSession));
+
+            // Fetch full user profile
+            const response = await fetch(`${BASE_URL}/user`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const result: ApiResponse<User> = await response.json();
+
+            if (result.status === "success" && result.data) {
+                const session = { user: result.data, token };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+                return { status: "success", message: "Logged in", data: session, code: 200 };
+            } else {
+                localStorage.removeItem(STORAGE_KEY);
+                return { status: "error", message: result.message || "Failed to fetch profile", data: null, code: result.code || 401 };
+            }
+        } catch (error) {
+            localStorage.removeItem(STORAGE_KEY);
+            console.error("[API] OAuth completion error:", error);
+            return { status: "error", message: "Network connection failed", data: null, code: 500 };
+        }
+    },
+
     // OAuth Authentication
     async loginWithGoogle(accessToken: string): Promise<ApiResponse<{ user: User, token: string }>> {
         try {

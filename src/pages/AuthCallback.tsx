@@ -22,12 +22,33 @@ const AuthCallback = () => {
                 return;
             }
 
-            if (!token || !provider) {
+            if (!token) {
                 toast.error("Malformed authentication handshake.");
                 navigate("/login");
                 return;
             }
 
+            // Backend OAuth flow: redirects with Sanctum token directly
+            // (e.g. /auth/complete?token=3|ABCxyz...)
+            if (token && !provider) {
+                setStatus("Establishing neural link...");
+                try {
+                    const resp = await api.completeOAuthLogin(token);
+                    if (resp.status === "success") {
+                        toast.success("Neural connection established.");
+                        navigate("/dashboard");
+                    } else {
+                        toast.error(resp.message || "Handshake rejected.");
+                        navigate("/login");
+                    }
+                } catch (err) {
+                    toast.error("Network interference during handshake.");
+                    navigate("/login");
+                }
+                return;
+            }
+
+            // Legacy flow: provider + access token
             setStatus(`Establishing link via ${provider}...`);
 
             try {
