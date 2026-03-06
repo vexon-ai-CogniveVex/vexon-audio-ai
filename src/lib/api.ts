@@ -181,6 +181,16 @@ const api = {
         }
     },
 
+    async getPlan(slug: string): Promise<ApiResponse<any>> {
+        try {
+            const response = await fetch(`${BASE_URL}/subscription-plans/${slug}`);
+            return await response.json();
+        } catch (error) {
+            console.error("[API] Fetch plan error:", error);
+            return { status: "error", message: "Failed to fetch plan", data: null, code: 500 };
+        }
+    },
+
     async seedPlans() {
         const defaultPlans = [
             { name: "Basic", slug: "basic", price: 0, description: "Eternal experimental use" },

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiMail, FiLock, FiArrowRight, FiActivity } from "react-icons/fi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
@@ -13,6 +13,8 @@ const VITE_RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const redirectTo = (location.state as any)?.from?.pathname || "/dashboard";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,7 @@ const Login = () => {
             const resp = await api.login(email, password, captchaToken);
             if (resp.status === "success") {
                 toast.success("Connection established.");
-                navigate("/dashboard");
+                navigate(redirectTo);
             } else {
                 toast.error(resp.message);
             }

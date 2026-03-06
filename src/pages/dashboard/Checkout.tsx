@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -7,15 +7,29 @@ import {
     FiShield,
     FiArrowLeft,
     FiZap,
-    FiActivity
+    FiActivity,
+    FiCheck
 } from "react-icons/fi";
 import api from "@/lib/api";
 import { toast } from "sonner";
+
+interface PlanData {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    price: number;
+    currency: string;
+    interval: string;
+    features: string[];
+}
 
 const Checkout = () => {
     const { planSlug } = useParams();
     const navigate = useNavigate();
     const [isProcessing, setIsProcessing] = useState(false);
+    const [plan, setPlan] = useState<PlanData | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [cardData, setCardData] = useState({
         card_number: "",
         expiry_month: "",
@@ -24,10 +38,29 @@ const Checkout = () => {
         card_holder: ""
     });
 
+    useEffect(() => {
+        const fetchPlan = async () => {
+            try {
+                const resp = await api.getPlan(planSlug || "pro");
+                if (resp.status === "success" && resp.data) {
+                    setPlan(resp.data);
+                } else {
+                    toast.error("Plan not found.");
+                    navigate("/dashboard/billing");
+                }
+            } catch (err) {
+                toast.error("Failed to load plan details.");
+                navigate("/dashboard/billing");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchPlan();
+    }, [planSlug, navigate]);
+
     const handlePayment = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Basic validation for 4242 dummy card
         if (cardData.card_number.replace(/\s/g, "") !== "4242424242424242" && !cardData.card_number.startsWith("4111")) {
             toast.error("Vocal authentication failed. Card pattern unrecognized by neural core.");
             return;
@@ -39,7 +72,7 @@ const Checkout = () => {
         try {
             const resp = await api.subscribe(planSlug || "pro", cardData);
             if (resp.status === "success") {
-                toast.success(`Protocol elevation to ${planSlug} complete.`);
+                toast.success(`Protocol elevation to ${plan?.name || planSlug} complete.`);
                 navigate("/dashboard/billing");
             } else {
                 toast.error(resp.message || "Payment protocol rejected.");
@@ -68,6 +101,21 @@ const Checkout = () => {
         }
     };
 
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-[400px]">
+                <FiZap className="text-primary animate-pulse text-4xl" />
+            </div>
+        );
+    }
+
+    const planPrice = plan?.price ?? 0;
+    const planName = plan?.name || planSlug || "Unknown";
+    const planDescription = plan?.description || "Sub-atomic frequency processing & high-fidelity synthesis";
+    const planFeatures = plan?.features || [];
+    const planCurrency = plan?.currency || "USD";
+    const planInterval = plan?.interval || "monthly";
+
     return (
         <div className="max-w-4xl mx-auto space-y-12 pb-20">
             <button
@@ -81,7 +129,7 @@ const Checkout = () => {
                 <span className="text-[10px] tracking-[0.5em] uppercase text-primary font-bold mb-4 block">Secure Checkout</span>
                 <h1 className="font-display text-5xl font-bold mb-6">Initialize Migration</h1>
                 <p className="text-white/40 text-lg font-light leading-relaxed">
-                    Confirm your identity and authorize the neural credit transfer to synchronize with the <span className="text-white font-bold">{planSlug?.toUpperCase()}</span> cluster.
+                    Confirm your identity and authorize the neural credit transfer to synchronize with the <span className="text-white font-bold">{planName.toUpperCase()}</span> cluster.
                 </p>
             </header>
 
@@ -190,15 +238,29 @@ const Checkout = () => {
                         <div className="space-y-8 mb-12">
                             <div className="flex items-start justify-between">
                                 <div>
-                                    <h3 className="text-2xl font-bold italic mb-2 uppercase">{planSlug} Access</h3>
-                                    <p className="text-sm text-white/40 font-light">Sub-atomic frequency processing & high-fidelity synthesis</p>
+                                    <h3 className="text-2xl font-bold italic mb-2 uppercase">{planName} Access</h3>
+                                    <p className="text-sm text-white/40 font-light">{planDescription}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-2xl font-bold">${planSlug === 'pro' ? '29.99' : planSlug === 'enterprise' ? '299.99' : '0.00'}</p>
-                                    <p className="text-[10px] text-white/20 font-bold tracking-widest uppercase">/ cycle</p>
+                                    <p className="text-2xl font-bold">${planPrice.toFixed(2)}</p>
+                                    <p className="text-[10px] text-white/20 font-bold tracking-widest uppercase">/ {planInterval}</p>
                                 </div>
                             </div>
                         </div>
+
+                        {/* Plan Features */}
+                        {planFeatures.length > 0 && (
+                            <div className="mb-8 border-t border-white/5 pt-6">
+                                <ul className="space-y-3">
+                                    {planFeatures.map((feature: string) => (
+                                        <li key={feature} className="flex items-center gap-3 text-sm text-white/50">
+                                            <FiCheck className="text-primary shrink-0" />
+                                            <span>{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
 
                         <div className="pt-8 border-t border-white/5 space-y-4">
                             <div className="flex justify-between text-xs font-bold tracking-widest uppercase">
@@ -207,7 +269,7 @@ const Checkout = () => {
                             </div>
                             <div className="flex justify-between text-xl font-bold tracking-widest uppercase pt-4 border-t border-white/5 text-primary">
                                 <span>Total Payload</span>
-                                <span>${planSlug === 'pro' ? '29.99' : planSlug === 'enterprise' ? '299.99' : '0.00'}</span>
+                                <span>${planPrice.toFixed(2)}</span>
                             </div>
                         </div>
 
@@ -216,7 +278,7 @@ const Checkout = () => {
 
                     <div className="p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.01]">
                         <p className="text-[10px] text-white/20 font-light leading-relaxed">
-                            By authorizing, you agree to the Vexon Neural Protocols. Your payment frequency is set to automatic monthly synchronization. All credit transfers are final within the current cycle.
+                            By authorizing, you agree to the Vexon Neural Protocols. Your payment frequency is set to automatic {planInterval} synchronization. All credit transfers are final within the current cycle.
                         </p>
                     </div>
                 </div>
