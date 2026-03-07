@@ -102,7 +102,7 @@ const Product = () => (
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex-1 relative"
+            className="flex-1 relative group"
           >
             <div className="absolute inset-x-0 h-[200px] bg-secondary/20 blur-[100px] opacity-30 rounded-full top-1/2 -translate-y-1/2" />
             <div className="relative overflow-hidden rounded-[3rem] border border-white/10 p-4 bg-white/5 backdrop-blur-2xl">
