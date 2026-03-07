@@ -103,6 +103,30 @@ const Checkout = () => {
         }
     };
 
+    const formatExpiry = (value: string) => {
+        const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+        if (v.length >= 2) {
+            return v.substring(0, 2) + " / " + v.substring(2, 4);
+        }
+        return v;
+    };
+
+    const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = e.target.value;
+        // If user is deleting the slash, delete the character before it too
+        if (val.endsWith(" /")) {
+            val = val.substring(0, val.length - 2);
+        }
+
+        const formatted = formatExpiry(val);
+        const [m, y] = formatted.split(" / ");
+        setCardData({
+            ...cardData,
+            expiry_month: m || "",
+            expiry_year: y || ""
+        });
+    };
+
     if (isLoading) {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
@@ -179,10 +203,9 @@ const Checkout = () => {
                                     type="text"
                                     required
                                     placeholder="MM / YY"
-                                    onChange={(e) => {
-                                        const [m, y] = e.target.value.split(" / ");
-                                        setCardData({ ...cardData, expiry_month: m || "", expiry_year: y || "" });
-                                    }}
+                                    maxLength={7}
+                                    value={cardData.expiry_month ? (cardData.expiry_year ? `${cardData.expiry_month} / ${cardData.expiry_year}` : cardData.expiry_month) : ""}
+                                    onChange={handleExpiryChange}
                                     className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] px-6 text-sm text-white placeholder:text-white/10 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all"
                                 />
                             </div>
