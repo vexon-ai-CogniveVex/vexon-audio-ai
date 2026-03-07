@@ -39,6 +39,7 @@ const PricingSection = () => {
   const navigate = useNavigate();
   const [plans, setPlans] = useState<any[]>(fallbackPlans);
   const [isLoading, setIsLoading] = useState(true);
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -67,7 +68,7 @@ const PricingSection = () => {
   }, []);
 
   const handlePlanClick = (slug: string) => {
-    navigate(`/dashboard/checkout/${slug}`);
+    window.open(`/dashboard/checkout/${slug}`, '_blank');
   };
 
   return (
@@ -93,6 +94,29 @@ const PricingSection = () => {
           >
             Simple, transparent commitments for every stage of your creative journey.
           </motion.p>
+        </div>
+
+        {/* Billing Toggle */}
+        <div className="flex justify-center mb-16">
+          <div className="relative p-1 bg-white/[0.03] border border-white/5 rounded-2xl flex items-center gap-2">
+            <button
+              onClick={() => setBillingCycle('monthly')}
+              className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${billingCycle === 'monthly' ? 'bg-white text-black shadow-xl' : 'text-white/40 hover:text-white'
+                }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle('yearly')}
+              className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 relative ${billingCycle === 'yearly' ? 'bg-white text-black shadow-xl' : 'text-white/40 hover:text-white'
+                }`}
+            >
+              Yearly
+              <span className="absolute -top-3 -right-3 bg-primary text-black text-[9px] font-black px-2 py-1 rounded-full border-2 border-[#0a0a0a] animate-pulse">
+                SAVE 20%
+              </span>
+            </button>
+          </div>
         </div>
 
         <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto items-center">
@@ -122,9 +146,22 @@ const PricingSection = () => {
               </div>
 
               <div className="mb-10 flex items-baseline gap-2">
-                <span className="font-display text-6xl font-bold text-white">${typeof plan.price === 'number' ? plan.price.toFixed(0) : plan.price}</span>
-                <span className="text-white/30 font-light lowercase">/period</span>
+                <span className="font-display text-6xl font-bold text-white">
+                  ${billingCycle === 'yearly' && plan.price > 0
+                    ? ((plan.price * 12 * 0.8) / 12).toFixed(0)
+                    : typeof plan.price === 'number' ? plan.price.toFixed(0) : plan.price}
+                </span>
+                <span className="text-white/30 font-light lowercase">
+                  /{billingCycle === 'monthly' ? 'month' : 'month'}
+                </span>
               </div>
+              {billingCycle === 'yearly' && plan.price > 0 && (
+                <div className="mb-6 -mt-8">
+                  <span className="text-primary text-[10px] font-bold tracking-wider uppercase">
+                    Billed ${(plan.price * 12 * 0.8).toFixed(0)} annually
+                  </span>
+                </div>
+              )}
 
               <div className="w-full h-px bg-white/5 mb-10" />
 

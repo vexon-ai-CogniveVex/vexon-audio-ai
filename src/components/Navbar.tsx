@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FiMenu, FiX, FiActivity } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
+import api from "@/lib/api";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -22,6 +23,8 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const user = api.getCurrentUser();
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-4' : 'py-8'}`}>
@@ -53,10 +56,12 @@ const Navbar = () => {
 
           <div className="hidden items-center gap-6 md:flex">
             <Link
-              to="/product"
+              to={user ? "/dashboard" : "/product"}
               className="relative group overflow-hidden rounded-full bg-white px-8 py-3 text-[10px] font-bold tracking-[0.2em] uppercase text-black transition-all hover:pr-10"
             >
-              <span className="relative z-10 transition-transform group-hover:-translate-x-1 inline-block">Initialize Engine</span>
+              <span className="relative z-10 transition-transform group-hover:-translate-x-1 inline-block">
+                {user ? "Enter Dashboard" : "Initialize Engine"}
+              </span>
               <div className="absolute top-1/2 -right-4 -translate-y-1/2 opacity-0 transition-all group-hover:right-4 group-hover:opacity-100">
                 <FiActivity className="text-sm" />
               </div>
@@ -93,11 +98,11 @@ const Navbar = () => {
               ))}
               <div className="h-px bg-white/10 my-4" />
               <Link
-                to="/product"
+                to={user ? "/dashboard" : "/product"}
                 onClick={() => setOpen(false)}
                 className="rounded-full bg-white px-8 py-5 text-center text-xs font-bold tracking-[0.2em] uppercase text-black"
               >
-                Launch Platform
+                {user ? "Enter Dashboard" : "Launch Platform"}
               </Link>
             </div>
           </motion.div>
