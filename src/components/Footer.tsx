@@ -3,6 +3,18 @@ import { FiGithub, FiLinkedin, FiYoutube, FiFacebook } from "react-icons/fi";
 import { FaXTwitter, FaPinterest } from "react-icons/fa6";
 import Logo from "./Logo";
 
+interface FooterLink {
+  label: string;
+  to?: string;
+  href?: string;
+  highlight?: boolean;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
 const Footer = () => (
   <footer className="relative bg-[#050505] pt-32 pb-16 overflow-hidden">
     {/* Subtle glow */}
@@ -50,6 +62,8 @@ const Footer = () => (
             links: [
               { label: "About", to: "/about" },
               { label: "Contact", to: "/contact" },
+              { label: "F6S Profile", href: "https://www.f6s.com/cognivevex-ai" },
+              { label: "Crunchbase", href: "https://www.crunchbase.com/organization/cognivevex-ai" },
             ],
           },
           {
@@ -59,21 +73,33 @@ const Footer = () => (
               { label: "Terms of Service", to: "/terms" },
             ],
           },
-        ].map((section) => (
+        ].map((section: FooterSection) => (
           <div key={section.title}>
             <h4 className="mb-8 font-display text-[10px] font-bold tracking-[0.4em] text-white uppercase">
               {section.title}
             </h4>
             <div className="flex flex-col gap-4">
-              {section.links.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.to}
-                  className={`text-sm font-light transition-colors hover:text-white ${link.highlight ? "text-secondary font-bold" : "text-white/30"}`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {section.links.map((link) =>
+                link.to ? (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    className={`text-sm font-light transition-colors hover:text-white ${link.highlight ? "text-secondary font-bold" : "text-white/30"}`}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-light transition-colors hover:text-white text-white/30"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
             </div>
           </div>
         ))}
