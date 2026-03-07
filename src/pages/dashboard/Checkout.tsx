@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
     FiCreditCard,
@@ -26,7 +26,9 @@ interface PlanData {
 
 const Checkout = () => {
     const { planSlug } = useParams();
+    const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const billingCycle = searchParams.get("cycle") || "monthly";
     const [isProcessing, setIsProcessing] = useState(false);
     const [plan, setPlan] = useState<PlanData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -109,12 +111,17 @@ const Checkout = () => {
         );
     }
 
-    const planPrice = plan?.price ?? 0;
+    let planPrice = Number(plan?.price ?? 0);
+    // Apply yearly discount if applicable
+    if (billingCycle === "yearly" && planPrice > 0) {
+        planPrice = (planPrice * 12 * 0.8) / 12;
+    }
+
     const planName = plan?.name || planSlug || "Unknown";
     const planDescription = plan?.description || "Sub-atomic frequency processing & high-fidelity synthesis";
     const planFeatures = plan?.features || [];
     const planCurrency = plan?.currency || "USD";
-    const planInterval = plan?.interval || "monthly";
+    const planInterval = billingCycle === "yearly" ? "yearly" : (plan?.interval || "monthly");
 
     return (
         <div className="max-w-4xl mx-auto space-y-12 pb-20">
@@ -242,8 +249,8 @@ const Checkout = () => {
                                     <p className="text-sm text-white/40 font-light">{planDescription}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-2xl font-bold">${planPrice.toFixed(2)}</p>
-                                    <p className="text-[10px] text-white/20 font-bold tracking-widest uppercase">/ {planInterval}</p>
+                                    <p className="text-2xl font-bold">${Number(planPrice).toFixed(2)}</p>
+                                    <p className="text-[10px] text-white/20 font-bold tracking-widest uppercase">/ {planInterval === 'yearly' ? 'year' : 'month'}</p>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +276,7 @@ const Checkout = () => {
                             </div>
                             <div className="flex justify-between text-xl font-bold tracking-widest uppercase pt-4 border-t border-white/5 text-primary">
                                 <span>Total Payload</span>
-                                <span>${planPrice.toFixed(2)}</span>
+                                <span>${Number(planPrice).toFixed(2)}</span>
                             </div>
                         </div>
 

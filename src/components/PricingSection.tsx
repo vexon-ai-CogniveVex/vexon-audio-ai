@@ -7,31 +7,31 @@ import api from "@/lib/api";
 // Fallback plans if API is unavailable
 const fallbackPlans = [
   {
-    slug: "basic",
-    name: "Acoustic",
-    price: 0,
-    description: "Perfect for exploring the basics of neural audio.",
-    features: ["5 Enhancement Credits", "Standard Quality (44.1kHz)", "Community Access"],
-    popular: false,
-    cta: "Start Free"
+    "slug": "basic",
+    "name": "Acoustic",
+    "price": 0,
+    "description": "Perfect for exploring the basics of neural audio.",
+    "features": ["5 Enhancement Credits", "Standard Quality (44.1kHz)", "Community Access"],
+    "popular": false,
+    "cta": "Start Free"
   },
   {
-    slug: "pro",
-    name: "Studio",
-    price: 29.99,
-    description: "The choice for professional creators and musicians.",
-    features: ["Unlimited Enhancements", "Studio Quality (96kHz)", "Voice Synthesis Engine", "Priority Support"],
-    popular: true,
-    cta: "Launch Studio"
+    "slug": "pro",
+    "name": "Studio",
+    "price": 29.99,
+    "description": "The choice for professional creators and musicians.",
+    "features": ["Unlimited Enhancements", "Studio Quality (96kHz)", "Voice Synthesis Engine", "Priority Support"],
+    "popular": true,
+    "cta": "Launch Studio"
   },
   {
-    slug: "enterprise",
-    name: "Orchestral",
-    price: 89.99,
-    description: "Unprecedented power for teams and agencies.",
-    features: ["Everything in Studio", "Technical API Access", "Custom Model Training", "Dedicated Architect"],
-    popular: false,
-    cta: "Scale Now"
+    "slug": "enterprise",
+    "name": "Orchestral",
+    "price": 89.99,
+    "description": "Unprecedented power for teams and agencies.",
+    "features": ["Everything in Studio", "Technical API Access", "Custom Model Training", "Dedicated Architect"],
+    "popular": false,
+    "cta": "Scale Now"
   }
 ];
 
@@ -68,7 +68,7 @@ const PricingSection = () => {
   }, []);
 
   const handlePlanClick = (slug: string) => {
-    window.open(`/dashboard/checkout/${slug}`, '_blank');
+    window.open(`/dashboard/checkout/${slug}?cycle=${billingCycle}`, '_blank');
   };
 
   return (
