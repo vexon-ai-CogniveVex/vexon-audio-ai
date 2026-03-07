@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FiArrowRight, FiActivity } from "react-icons/fi";
 
 const CTASection = () => (
-  <section className="relative overflow-hidden py-40 bg-[#050505]">
+  <section className="relative overflow-hidden py-10 sm:py-40 bg-[#050505]">
     {/* Dynamic Background */}
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[160px] opacity-50" />
 
@@ -13,7 +13,7 @@ const CTASection = () => (
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="relative overflow-hidden rounded-[4rem] border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-16 md:p-32 text-center backdrop-blur-3xl"
+        className="relative overflow-hidden rounded-[4rem] border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-2 sm:p-16 md:p-32 text-center backdrop-blur-3xl"
       >
         {/* Animated Accent */}
         <motion.div

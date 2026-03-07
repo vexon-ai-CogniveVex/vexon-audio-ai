@@ -43,7 +43,7 @@ const About = () => (
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="flex-1 h-[600px] relative overflow rounded-[4rem] border border-white/10"
+            className="flex-1 h-[600px] relative overflow-hidden rounded-[4rem] border border-white/10"
           >
             <img src={aboutImage} alt="Mission Abstract" className="absolute inset-0 w-full h-full object-cover scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -59,7 +59,7 @@ const About = () => (
     </section>
 
     {/* Values Matrix */}
-    <section className="py-40 relative">
+    <section className="py-40 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] pointer-events-none" />
 
@@ -93,7 +93,7 @@ const About = () => (
     </section>
 
     {/* High-End Trust Section */}
-    <section className="py-40 bg-[#0a0a0a]">
+    <section className="py-40 bg-[#0a0a0a] overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
