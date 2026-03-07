@@ -63,8 +63,15 @@ const ChatWidget = () => {
 
             const resp = await api.generateChat(chatHistory);
 
-            if (resp.status === "success" && resp.data?.response) {
-                setMessages(prev => [...prev, { role: "assistant", content: resp.data.response }]);
+            if (resp.status === "success" && resp.data) {
+                // Handle various response structures (direct string, {response: ...}, or OpenAI-style {choices: [...]})
+                let messageContent = resp.data.response || resp.data;
+
+                if (resp.data.choices?.[0]?.message?.content) {
+                    messageContent = resp.data.choices[0].message.content;
+                }
+
+                setMessages(prev => [...prev, { role: "assistant", content: typeof messageContent === 'string' ? messageContent : JSON.stringify(messageContent) }]);
             } else {
                 setMessages(prev => [...prev, { role: "assistant", content: "Signal interference detected. Handshake failed." }]);
             }
@@ -76,7 +83,7 @@ const ChatWidget = () => {
     };
 
     return (
-        <div className="fixed bottom-6 right-24 z-[100]">
+        <div className="fixed bottom-6 right-6 sm:right-24 z-[100]">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
