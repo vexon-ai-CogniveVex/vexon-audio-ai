@@ -54,7 +54,7 @@ const Footer = () => (
               { label: "Vexon AI", to: "/product", highlight: true },
               { label: "Technology", to: "/technology" },
               { label: "Features", to: "/features" },
-              { label: "Pricing", to: "/pricing" },
+              { label: "Pricing", to: "/#pricing" },
             ],
           },
           {

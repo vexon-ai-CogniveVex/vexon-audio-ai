@@ -1,18 +1,16 @@
-# Welcome to your Lovable project
+# Vexon Audio AI
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Vexon Audio AI is a neural audio platform for content creators, musicians, and engineering teams. It combines AI synthesis, noise reduction, vocal enhancement, and real-time mixing workflows in a polished React interface.
+
+**Local URL**: http://localhost:5173
+
+**Live app**: https://cognivevex.com/
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
@@ -62,12 +60,11 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Deploy as a static site using Vercel, Netlify, or GitHub Pages by pointing to the `dist/` build output.
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to this project?
 
-Yes, you can!
+Yes, connect your domain in your provider dashboard and point it to your deployment (e.g., `https://cognivevex.com`).
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
