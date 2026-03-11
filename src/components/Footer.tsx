@@ -33,6 +33,7 @@ const Footer = () => (
               { icon: FaPinterest, href: "https://www.pinterest.com/CogniveVex/" },
               { icon: FiYoutube, href: "https://www.youtube.com/@CogniveVexAI" },
               { icon: FiFacebook, href: "https://www.facebook.com/CogniveVexAI/" },
+              { icon: FiLinkedin, href: "https://www.linkedin.com/company/cognivevex-ai" },
             ].map((social, i) => (
               <a
                 key={i}
