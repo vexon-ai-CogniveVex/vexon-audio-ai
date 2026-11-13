@@ -62,6 +62,7 @@ const Footer = () => (
             title: "Network",
             links: [
               { label: "About", to: "/about" },
+              { label: "Blog", to: "/blog" },
               { label: "Contact", to: "/contact" },
               { label: "F6S Profile", href: "https://www.f6s.com/cognivevex-ai" },
               { label: "Crunchbase", href: "https://www.crunchbase.com/organization/cognivevex-ai" },
