@@ -1,0 +1,159 @@
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FiMail, FiLock, FiArrowRight, FiActivity } from "react-icons/fi";
+import { FaGoogle, FaGithub } from "react-icons/fa";
+import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
+import api from "@/lib/api";
+import { toast } from "sonner";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const VITE_RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
+const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const redirectTo = (location.state as any)?.from?.pathname || "/dashboard";
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!captchaToken) {
+            toast.error("Please complete the neural handshake (CAPTCHA).");
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            const resp = await api.login(email, password, captchaToken);
+            if (resp.status === "success") {
+                toast.success("Connection established.");
+                navigate(redirectTo);
+            } else {
+                toast.error(resp.message);
+            }
+        } catch (err) {
+            toast.error("Vocal match failed. Network interference detected.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return (
+        <div className="min-h-screen bg-[#050505] text-white flex flex-col">
+            <div className="relative flex-grow flex items-center justify-center px-6 py-20 overflow-hidden">
+                {/* Decorative Background */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px] opacity-30" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative w-full max-w-md"
+                >
+                    <div className="flex flex-col items-center mb-12">
+                        <Logo size="lg" className="mb-8" />
+                        <h1 className="font-display text-4xl font-bold mb-3 tracking-tighter">Welcome Back</h1>
+                        <p className="text-white/40 font-light tracking-[0.3em] text-[10px] uppercase">Re-establish neural connection</p>
+                    </div>
+
+                    <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.03] p-10 md:p-14 backdrop-blur-3xl shadow-2xl">
+
+                        {/* Social Logins */}
+                        <div className="grid grid-cols-2 gap-4 mb-8">
+                            <button
+                                onClick={() => window.location.href = "https://api.cognivevex.com/api/auth/google/redirect"}
+                                className="flex items-center justify-center gap-3 h-14 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all text-sm font-bold tracking-tight"
+                            >
+                                <FaGoogle className="text-red-500" />
+                                Google
+                            </button>
+                            <button
+                                onClick={() => window.location.href = "https://api.cognivevex.com/api/auth/github/redirect"}
+                                className="flex items-center justify-center gap-3 h-14 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all text-sm font-bold tracking-tight"
+                            >
+                                <FaGithub />
+                                GitHub
+                            </button>
+                        </div>
+
+                        <div className="flex items-center gap-4 mb-8 text-white/10">
+                            <div className="h-px flex-grow bg-white/5" />
+                            <span className="text-[10px] font-bold tracking-[0.2em] uppercase">OR</span>
+                            <div className="h-px flex-grow bg-white/5" />
+                        </div>
+
+                        <form className="space-y-6 text-left" onSubmit={handleLogin}>
+                            <div className="space-y-2">
+                                <label className="text-[10px] tracking-[0.3em] font-bold text-white/30 uppercase ml-1">Frequency Email</label>
+                                <div className="relative group">
+                                    <FiMail className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" />
+                                    <input
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="name@protocol.ai"
+                                        className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white placeholder:text-white/10 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <div className="flex justify-between items-center">
+                                    <label className="text-[10px] tracking-[0.3em] font-bold text-white/30 uppercase ml-1">Secure Key</label>
+                                    <Link to="/forgot-password" title="Recover Frequency" className="text-[10px] tracking-[0.2em] font-bold text-primary/60 hover:text-primary uppercase transition-colors">Lost Key?</Link>
+                                </div>
+                                <div className="relative group">
+                                    <FiLock className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" />
+                                    <input
+                                        type="password"
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="••••••••"
+                                        className="w-full h-14 rounded-2xl border border-white/5 bg-white/[0.02] pl-12 pr-6 text-sm text-white placeholder:text-white/10 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* reCAPTCHAHandshake */}
+                            <div className="flex justify-center py-2">
+                                <ReCAPTCHA
+                                    sitekey={VITE_RECAPTCHA_SITE_KEY} // Testing key
+                                    onChange={(token) => setCaptchaToken(token)}
+                                    theme="dark"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="group w-full h-16 rounded-2xl bg-white flex items-center justify-center gap-3 text-black font-display font-bold text-sm tracking-widest uppercase hover:bg-primary transition-colors mt-8 disabled:opacity-50"
+                            >
+                                {isLoading ? "Connecting..." : "Initialize Login"}
+                                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+                            </button>
+                        </form>
+
+                        <div className="mt-10 pt-10 border-t border-white/5 text-center">
+                            <p className="text-white/30 text-xs font-light tracking-wide">
+                                New to the network? <Link to="/signup" className="text-white font-bold hover:text-primary transition-colors">Register Entity</Link>
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+
+            <Footer />
+        </div>
+    );
+};
+
+export default Login;
