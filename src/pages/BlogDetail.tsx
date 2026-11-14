@@ -49,10 +49,36 @@ const BlogDetail = () => {
 
   useEffect(() => {
     if (post) {
-      document.title = post.metaTitle ? `${post.metaTitle} | Vexon` : `${post.title} | Vexon`;
-      const metaDescriptionTag = document.querySelector('meta[name="description"]');
-      if (metaDescriptionTag && (post.metaDescription || post.excerpt)) {
-        metaDescriptionTag.setAttribute("content", post.metaDescription || post.excerpt);
+      const pageTitle = post.metaTitle ? `${post.metaTitle} | Vexon` : `${post.title} | Vexon`;
+      const pageDesc = post.metaDescription || post.excerpt || "";
+      const pageImage = post.image?.startsWith("http") ? post.image : `https://cognivevex.com${post.image}`;
+      const pageUrl = `https://cognivevex.com/blog/${post.id}`;
+
+      document.title = pageTitle;
+
+      const setMeta = (nameOrProperty: string, content: string, isProp = false) => {
+        const selector = isProp ? `meta[property="${nameOrProperty}"]` : `meta[name="${nameOrProperty}"]`;
+        let meta = document.querySelector(selector);
+        if (!meta) {
+          meta = document.createElement("meta");
+          meta.setAttribute(isProp ? "property" : "name", nameOrProperty);
+          document.head.appendChild(meta);
+        }
+        meta.setAttribute("content", content);
+      };
+
+      if (pageDesc) {
+        setMeta("description", pageDesc);
+        setMeta("og:description", pageDesc, true);
+        setMeta("twitter:description", pageDesc);
+      }
+      setMeta("og:title", pageTitle, true);
+      setMeta("twitter:title", pageTitle);
+      setMeta("og:url", pageUrl, true);
+      setMeta("twitter:url", pageUrl);
+      if (pageImage) {
+        setMeta("og:image", pageImage, true);
+        setMeta("twitter:image", pageImage);
       }
     }
   }, [post]);
@@ -284,10 +310,10 @@ const BlogDetail = () => {
         {/* Related Blog Posts */}
         <section className="mt-24 pt-16 border-t border-white/10">
           <div className="flex items-center justify-between gap-4 mb-10">
-            <h2 className="font-display text-2xl font-bold text-white">More from Vexon Blog</h2>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-white">More from Vexon Blog</h2>
             <Link
               to="/blog"
-              className="text-xs font-semibold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors"
+              className="text-xs font-semibold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors shrink-0"
             >
               View all posts →
             </Link>

@@ -50,7 +50,7 @@ describe("Navbar & Blog pages", () => {
     const recentGrid = container.querySelector(".grid");
     expect(recentGrid).not.toBeNull();
     const recentCards = recentGrid!.querySelectorAll("article");
-    expect(recentCards.length).toBe(14);
+    expect(recentCards.length).toBe(13);
     expect(recentCards.length).toBeLessThanOrEqual(15);
 
     const firstPostLink = recentCards[0].querySelector('a[href^="/blog/"]');

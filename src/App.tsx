@@ -18,8 +18,8 @@ import AuthCallback from "./pages/AuthCallback";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import NotFound from "./pages/NotFound";
-import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopNav from "./components/ScrollToTopNav";
+import CanonicalTag from "./components/CanonicalTag";
 import ChatWidget from "./components/ChatWidget";
 import CookieConsent from "./components/CookieConsent";
 
@@ -43,7 +43,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTopNav />
-        <ScrollToTop />
+        <CanonicalTag />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/product" element={<Product />} />

@@ -5,7 +5,7 @@ import { FiArrowRight, FiActivity } from "react-icons/fi";
 const CTASection = () => (
   <section className="relative overflow-hidden py-10 sm:py-40 bg-[#050505]">
     {/* Dynamic Background */}
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[160px] opacity-50" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[100px] opacity-40 pointer-events-none" />
 
     <div className="container relative z-10 mx-auto px-6">
       <motion.div

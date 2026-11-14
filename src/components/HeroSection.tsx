@@ -18,18 +18,20 @@ const HeroSection = () => {
   return (
     <section ref={targetRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]">
       {/* Background with parallax effect */}
-      <motion.div style={{ opacity, scale }} className="absolute inset-0 z-0">
+      <motion.div style={{ opacity, scale }} className="absolute inset-0 z-0 will-change-transform">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/50 to-[#050505] z-10" />
         <img
           src={heroImage}
           alt="Abstract Audio AI"
           className="h-full w-full object-cover opacity-60"
+          loading="eager"
+          decoding="async"
         />
 
-        {/* Animated Orbs */}
+        {/* Animated Orbs with GPU acceleration */}
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
+            scale: [1, 1.15, 1],
             opacity: [0.1, 0.2, 0.1],
           }}
           transition={{
@@ -37,11 +39,11 @@ const HeroSection = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px]"
+          className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-secondary/20 rounded-full blur-[80px] pointer-events-none translate-z-0"
         />
         <motion.div
           animate={{
-            scale: [1, 1.1, 1],
+            scale: [1, 1.08, 1],
             opacity: [0.1, 0.15, 0.1],
           }}
           transition={{
@@ -49,11 +51,11 @@ const HeroSection = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-accent/5 rounded-full blur-[150px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-accent/5 rounded-full blur-[90px] pointer-events-none translate-z-0"
         />
         <motion.div
           animate={{
-            scale: [1.2, 1, 1.2],
+            scale: [1.15, 1, 1.15],
             opacity: [0.1, 0.2, 0.1],
           }}
           transition={{
@@ -61,7 +63,7 @@ const HeroSection = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[150px]"
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[90px] pointer-events-none translate-z-0"
         />
       </motion.div>
 
@@ -69,18 +71,8 @@ const HeroSection = () => {
       <div className="container relative z-20 mx-auto px-6 pt-20">
         <motion.div
           style={{ y, opacity }}
-          className="mx-auto max-w-5xl text-center"
+          className="mx-auto max-w-5xl text-center will-change-transform"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-white/70 backdrop-blur-md">
-              <span className="h-1 w-1 rounded-full bg-secondary shadow-[0_0_8px_rgba(255,100,100,0.8)]" />
-              <span className="text-gradient-accent">THE FUTURE OF AUDIO INTELLIGENCE</span>
-            </span>
-          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
